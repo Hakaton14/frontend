@@ -14,6 +14,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "@Components": ["components"],
+      "@UI": ["ui-kit"],
+      "@Store": ["store"],
+      "@Hooks": ["hooks"],
+      "@Utils": ["utils"],
+    },
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
