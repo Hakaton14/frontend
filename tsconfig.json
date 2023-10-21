@@ -21,6 +21,7 @@
       "@Store": ["store"],
       "@Hooks": ["hooks"],
       "@Utils": ["utils"],
+      "@Features": ["features"]
     },
   },
   "include": ["src"],
