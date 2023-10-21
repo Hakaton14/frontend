@@ -4,6 +4,15 @@ import react from "@vitejs/plugin-react"
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      "@Components": "./src/components/index.ts",
+      "@UI": "./src/ui-kit/index.ts",
+      "@Store": "./src/store/index.ts",
+      "@Hooks": "./src/hooks/index.ts",
+      "@Utils": "./src/utils/index.ts",
+    },
+  },
   server: {
     open: true,
   },
