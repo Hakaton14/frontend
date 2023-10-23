@@ -11,6 +11,7 @@ export default defineConfig({
       "@Store": "./src/store/index.ts",
       "@Hooks": "./src/hooks/index.ts",
       "@Utils": "./src/utils/index.ts",
+      "@Features": "./src/features/index.ts",
     },
   },
   server: {
