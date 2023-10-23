@@ -10,6 +10,7 @@ export default defineConfig({
       "@UI": "./src/ui-kit/index.ts",
       "@Store": "./src/store/index.ts",
       "@Hooks": "./src/hooks/index.ts",
+      "@ReduxHooks": "./src/app/index.ts",
       "@Utils": "./src/utils/index.ts",
       "@Features": "./src/features/index.ts",
     },
