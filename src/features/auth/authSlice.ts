@@ -12,10 +12,11 @@ interface IinitialState {
   isLoading: boolean
   isError: boolean
   isSuccess: boolean
-  message: string | undefined
+  message: string | unknown
 }
 
-const user: IUser = JSON.parse(localStorage.getItem("user") || "")
+const json = localStorage.getItem("user")
+const user: IUser = json && JSON.parse(json)
 
 const initialState: IinitialState = {
   user: user || null,
@@ -24,6 +25,7 @@ const initialState: IinitialState = {
   isSuccess: false,
   message: "",
 }
+
 //Регистрация
 //TODO Доделать типизацию
 export const register = createAsyncThunk(
@@ -37,6 +39,18 @@ export const register = createAsyncThunk(
     }
   },
 )
+export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
+  try {
+    return await authService.login(user)
+  } catch (error) {
+    const err = error as AxiosError
+    return thunkAPI.rejectWithValue(err.response?.data)
+  }
+})
+//Выход
+export const logout = createAsyncThunk("auth/logout", async () => {
+  await authService.logout()
+})
 
 export const authSlice = createSlice({
   name: "auth",
@@ -50,7 +64,40 @@ export const authSlice = createSlice({
       state.message = ""
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(register.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.user = action.payload
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.user = null
+      })
+      .addCase(login.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.user = action.payload
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.user = null
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.user = null
+      })
+  },
 })
 
 export const { reset } = authSlice.actions
