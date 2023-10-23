@@ -19,6 +19,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.14",
     "@reduxjs/toolkit": "^1.8.1",
+    "@types/yup": "^0.32.0",
     "axios": "^1.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
