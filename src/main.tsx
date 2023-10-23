@@ -7,8 +7,9 @@ import "./index.css"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    {/* Временно закоментирован, для того чтобы получить доступ к отбражению компонетов */}
+    {/* <Provider store={store}> */}
+    <App />
+    {/* </Provider> */}
   </React.StrictMode>,
 )
