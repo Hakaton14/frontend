@@ -3,8 +3,8 @@ import { authService } from "@Features"
 import { AxiosError } from "axios"
 
 interface IUser {
-  name: string
   email: string
+  password: string
 }
 
 interface IinitialState {
@@ -28,27 +28,36 @@ const initialState: IinitialState = {
 
 //Регистрация
 //TODO Доделать типизацию
-export const register = createAsyncThunk(
-  "auth/register",
-  async (user, thunkAPI) => {
+export const signIn = createAsyncThunk(
+  "auth/signIn",
+  async (userData, thunkAPI) => {
     try {
-      return await authService.register(user)
+      return await authService.signIn(userData)
     } catch (error) {
       const err = error as AxiosError
       return thunkAPI.rejectWithValue(err.response?.data)
     }
   },
 )
-export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
-  try {
-    return await authService.login(user)
-  } catch (error) {
-    const err = error as AxiosError
-    return thunkAPI.rejectWithValue(err.response?.data)
-  }
-})
+
+//Вход пользователя
+export const login = createAsyncThunk(
+  "auth/login",
+  async (userData: IUser, thunkAPI) => {
+    try {
+      // return await authService.login(userData)
+      //поменять когда будет работать сервер
+      const { email, password } = userData
+      console.log(email, password)
+      return userData
+    } catch (error) {
+      const err = error as AxiosError
+      return thunkAPI.rejectWithValue(err.response?.data)
+    }
+  },
+)
 //Выход
-export const logout = createAsyncThunk("auth/logout", async () => {
+export const logout = createAsyncThunk("auth/logout", async (data) => {
   await authService.logout()
 })
 
@@ -66,15 +75,15 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(register.pending, (state) => {
+      .addCase(signIn.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(signIn.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
         state.user = action.payload
       })
-      .addCase(register.rejected, (state, action) => {
+      .addCase(signIn.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

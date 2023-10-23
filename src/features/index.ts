@@ -2,3 +2,4 @@
 
 export { default as authReducer } from "./auth/authSlice"
 export { default as authService } from "./auth/authService"
+export { signIn, login, logout } from "./auth/authSlice"
