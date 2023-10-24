@@ -4,17 +4,23 @@ import { AxiosError } from "axios"
 
 interface IUser {
   email: string
+  first_name?: string
+  last_name?: string
+  phone?: string
+  avatar?: string
+  date_joined?: string
   password: string
 }
 
 interface IinitialState {
-  user: null | IUser
+  user: IUser | null
   isLoading: boolean
   isError: boolean
   isSuccess: boolean
   message: string | unknown
 }
 
+//Получение пользователя из локалстора
 const json = localStorage.getItem("user")
 const user: IUser = json && JSON.parse(json)
 
@@ -30,7 +36,7 @@ const initialState: IinitialState = {
 //TODO Доделать типизацию
 export const signIn = createAsyncThunk(
   "auth/signIn",
-  async (userData, thunkAPI) => {
+  async (userData: IUser, thunkAPI) => {
     try {
       return await authService.signIn(userData)
     } catch (error) {
@@ -45,17 +51,17 @@ export const login = createAsyncThunk(
   "auth/login",
   async (userData: IUser, thunkAPI) => {
     try {
-      // return await authService.login(userData)
+      return await authService.login(userData)
       //поменять когда будет работать сервер
-      const { email, password } = userData
-      console.log(email, password)
-      return userData
+      // const { email, password } = userData
+      // return userData
     } catch (error) {
       const err = error as AxiosError
       return thunkAPI.rejectWithValue(err.response?.data)
     }
   },
 )
+
 //Выход
 export const logout = createAsyncThunk("auth/logout", async (data) => {
   await authService.logout()

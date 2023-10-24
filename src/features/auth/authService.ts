@@ -1,19 +1,28 @@
 import axios from "axios"
 
 //TODO Вынести в .env
-const API_URL = "http://127.0.0.1:8000/api"
+const API_URL = "http://127.0.0.1:8000/api/v1"
 
 //Регистрация пользователя
 //TODO Дописать типы юзера
 const signIn = async (userData: any) => {
   const response = await axios.post(`${API_URL}/users/`, userData)
+  console.log(userData)
   response.data && localStorage.setItem("user", JSON.stringify(response.data))
   return response.data
 }
 //Вход пользователя
 const login = async (userData: any) => {
-  const response = await axios.post(API_URL, userData)
-  response.data && localStorage.setItem("user", JSON.stringify(response.data))
+  console.log(userData)
+  const tokenData = await axios.post(`${API_URL}/auth/token/create/`, userData)
+  const response = await axios.get(`${API_URL}/api/v1/users/me/`, {
+    headers: { Authorization: `Bearer ${tokenData.data.access}` },
+  })
+  response.data &&
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ ...response.data, ...tokenData }),
+    )
   return response.data
 }
 //Выход пользователя
