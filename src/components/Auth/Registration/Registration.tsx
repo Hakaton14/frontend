@@ -7,7 +7,23 @@ const Registration: FC = () => {
       <h2 className={styles.title}>Регистрация</h2>
 
       <form>
-        <button type="submit">Зарегистрироваться</button>
+        <div className={styles.input}>
+          <Input type={"text"} placeholder={"Фамилия"} />
+        </div>
+
+        <div className={styles.input}>
+          <Input type={"password"} placeholder={"Пароль"} />
+        </div>
+
+        <div className={styles.input}>
+          <Input type={"password"} placeholder={"Пароль"} />
+        </div>
+
+        <div className={styles.button}>
+          <Button type="submit" fullWidth variant="contained" size="medium">
+            Зарегистрироваться
+          </Button>
+        </div>
       </form>
 
       <div className={styles.toolbar}>
