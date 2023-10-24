@@ -10,6 +10,7 @@ const sxStyles: SxProps = {
     height: "20px",
     padding: "10px 12px",
     // margin: "4px 0",
+    background: "#FFFFFF",
   },
   "& .MuiInputBase-input:disabled": {
     border: "1px solid #DDE0E4",
@@ -28,15 +29,15 @@ const sxStyles: SxProps = {
 
 type TInputProps = {
   customLabel?: string
+  field?: any
 }
 
 const Input = (props: TextFieldProps & TInputProps) => {
   const { customLabel, sx, ...rest } = props
-
   return (
     <>
       {customLabel && <span className={styles.LabelСustom}>Custom</span>}
-      <TextField sx={sxStyles} placeholder="Your Placeholder Here" {...rest} />
+      <TextField sx={sxStyles} {...rest} />
     </>
   )
 }
