@@ -8,11 +8,11 @@ const Registration: FC = () => {
 
       <form>
         <div className={styles.input}>
-          <Input type={"text"} placeholder={"Фамилия"} />
+          <Input type={"text"} placeholder={"Фамилия и Имя"} />
         </div>
 
         <div className={styles.input}>
-          <Input type={"password"} placeholder={"Пароль"} />
+          <Input type={"email"} placeholder={"Email"} />
         </div>
 
         <div className={styles.input}>
