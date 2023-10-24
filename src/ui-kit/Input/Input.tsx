@@ -27,17 +27,19 @@ const sxStyles: SxProps = {
     },
 }
 
-type TInputProps = {
+export type TInputProps = {
   customLabel?: string
-  field?: any
+  register?: any
+  registerName?: string
 }
 
 const Input = (props: TextFieldProps & TInputProps) => {
-  const { customLabel, sx, ...rest } = props
+  const { customLabel, register, registerName, sx, ...rest } = props
+
   return (
     <>
       {customLabel && <span className={styles.LabelСustom}>Custom</span>}
-      <TextField sx={sxStyles} {...rest} />
+      <TextField {...register(`${registerName}`)} sx={sxStyles} {...rest} />
     </>
   )
 }
