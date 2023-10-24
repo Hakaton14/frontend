@@ -1,17 +1,23 @@
-import { FC } from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { Button } from "@mui/material"
 import { Input } from "@UI"
 import { loginShema } from "@Utils"
+import { login } from "@Features"
 import styles from "./Login.module.scss"
+import { useAppDispatch } from "@ReduxHooks"
+
+interface Inputs {
+  email: string
+  password: string
+}
 
 type formLogin = {
   email: string
   password: string
 }
 
-const Login: FC = () => {
+const Login = () => {
   const {
     register,
     handleSubmit,
@@ -20,8 +26,9 @@ const Login: FC = () => {
     resolver: yupResolver(loginShema),
   })
 
-  const onSubmit = (data: any) => {
-    console.log(data, "Данные авторизации")
+  const dispatch = useAppDispatch()
+  const onSubmit = async (userData: Inputs) => {
+    dispatch(login(userData))
   }
 
   return (
@@ -51,13 +58,7 @@ const Login: FC = () => {
           />
         </div>
 
-        <div className={styles.button}>
-          <Button type="submit" fullWidth variant="contained" size="medium">
-            Войти
-          </Button>
-        </div>
-
-        <div className={styles.button}>
+        <div className={styles.Button}>
           <Button
             type="submit"
             fullWidth
