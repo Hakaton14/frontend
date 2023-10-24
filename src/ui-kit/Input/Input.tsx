@@ -1,6 +1,5 @@
 import { SxProps, TextField, TextFieldProps } from "@mui/material"
 import styles from "./Input.module.scss"
-import { forwardRef } from "react"
 
 const sxStyles: SxProps = {
   width: "100%",
@@ -34,13 +33,8 @@ export type TInputProps = {
   registerName?: string
 }
 
-<<<<<<< HEAD
 const Input = (props: TextFieldProps & TInputProps) => {
   const { customLabel, register, registerName, sx, ...rest } = props
-=======
-const Input = forwardRef((props: TextFieldProps & TInputProps, ref) => {
-  const { customLabel, sx, ...rest } = props
->>>>>>> 81be05b6164195e5b12d63adc615902aecb26504
 
   return (
     <>
@@ -48,5 +42,5 @@ const Input = forwardRef((props: TextFieldProps & TInputProps, ref) => {
       <TextField {...register(`${registerName}`)} sx={sxStyles} {...rest} />
     </>
   )
-})
+}
 export default Input
