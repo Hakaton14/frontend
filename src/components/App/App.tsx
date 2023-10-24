@@ -1,9 +1,11 @@
-import { Auth } from "@Components"
+import { Calendar } from "@Components"
+// import { Auth } from "@Components"
 
 function App() {
   return (
     <div className="App">
-      <Auth />
+      <Calendar />
+      {/* <Auth /> */}
     </div>
   )
 }
