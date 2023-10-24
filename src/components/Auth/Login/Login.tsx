@@ -57,11 +57,17 @@ const Login: FC = () => {
           </Button>
         </div>
 
-        {/* <div className={styles.button}>
-          <Button type="submit" fullWidth variant="outlined" size="medium">
+        <div className={styles.button}>
+          <Button
+            type="submit"
+            fullWidth
+            variant="outlined"
+            size="medium"
+            disabled
+          >
             Войти с Яндекс ID
           </Button>
-        </div> */}
+        </div>
       </form>
 
       <div>
