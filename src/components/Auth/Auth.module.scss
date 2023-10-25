@@ -1,6 +1,35 @@
+$paddingWT: 0;
+$paddingWB: 32px;
+$paddingHL: 64px;
+$paddingHR: 64px;
+$bgModule:#1A1B22;
+
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  height: 100vh;
+  background-color: #{$bgModule};
+}
+
 .container{
-  width: 448px;
-  height: 564px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(448px - #{$paddingWT + $paddingWB});
+  min-height: calc(630px - #{$paddingHL + $paddingHR});
   border-radius: 16px;
   background-color: #F9FAFB;
+  padding: #{$paddingWT} #{$paddingHR} #{$paddingWB} #{$paddingHL};
+}
+
+.title {
+  font-family: YS Display;
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 40px;
+  letter-spacing: 0em;
+  text-align: center;
 }

@@ -1,9 +1,10 @@
+import { Calendar } from "@Components"
 import { Auth } from "@Components"
 
 function App() {
   return (
     <div className="App">
-      <Auth />
+      <Auth podComponent="registration" />
     </div>
   )
 }

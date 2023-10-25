@@ -21,7 +21,9 @@
       "@Store": ["store"],
       "@Hooks": ["hooks"],
       "@Utils": ["utils"],
-      "@Features": ["features"]
+      "@Features": ["features"],
+      "@ReduxHooks": ["app"],
+
     },
   },
   "include": ["src"],
