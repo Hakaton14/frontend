@@ -1,18 +1,27 @@
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import styles from "./Registration.module.scss"
 import { Input } from "@UI"
 import { Button } from "@mui/material"
 import { registrationShema } from "@Utils"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { useAppDispatch, useAppSelector } from "@ReduxHooks"
+import { login, signUp } from "@Features"
 
 type formRegistration = {
-  fullName: string
+  first_name: string
+  last_name: string
   email: string
   password: string
+  phone: string
 }
 
 const Registration: FC = () => {
+  const dispatch = useAppDispatch()
+  const { isError, isSuccess, message, isLoading } = useAppSelector(
+    (state) => state.auth,
+  )
+
   const {
     register,
     handleSubmit,
@@ -21,8 +30,12 @@ const Registration: FC = () => {
     resolver: yupResolver(registrationShema),
   })
 
-  const onSubmit = (data: any) => {
-    console.log(data)
+  useEffect(() => {
+    //редирект на логин
+  }, [isError, isSuccess, message])
+
+  const onSubmit = async (userData: formRegistration) => {
+    await dispatch(signUp(userData))
   }
 
   return (
@@ -33,11 +46,33 @@ const Registration: FC = () => {
         <div className={styles.input}>
           <Input
             type={"text"}
-            placeholder={"Фамилия и Имя"}
+            placeholder={"Имя"}
             register={register}
-            registerName={"fullName"}
-            error={!!errors.fullName}
-            helperText={errors.fullName?.message}
+            registerName={"first_name"}
+            error={!!errors.first_name}
+            helperText={errors.first_name?.message}
+          />
+        </div>
+
+        <div className={styles.input}>
+          <Input
+            type={"text"}
+            placeholder={"Фамилия"}
+            register={register}
+            registerName={"last_name"}
+            error={!!errors.last_name}
+            helperText={errors.last_name?.message}
+          />
+        </div>
+
+        <div className={styles.input}>
+          <Input
+            type={"phone"}
+            placeholder={"phone"}
+            register={register}
+            registerName={"phone"}
+            error={!!errors.phone}
+            helperText={errors.phone?.message}
           />
         </div>
 
@@ -64,7 +99,7 @@ const Registration: FC = () => {
         </div>
 
         <div className={styles.button}>
-          <Button type="submit" fullWidth variant="contained" size="medium">
+          <Button type="submit" variant="contained" size="medium" fullWidth>
             Зарегистрироваться
           </Button>
         </div>

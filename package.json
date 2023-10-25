@@ -19,9 +19,11 @@
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.3.2",
     "@mui/material": "^5.14.14",
+    "@mui/x-date-pickers": "^6.16.3",
     "@reduxjs/toolkit": "^1.8.1",
     "@types/yup": "^0.32.0",
     "axios": "^1.5.1",
+    "dayjs": "^1.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
@@ -58,7 +60,8 @@
     ],
     "rules": {
       "prettier/prettier": "error",
-      "react/jsx-no-target-blank": "off"
+      "react/jsx-no-target-blank": "off",
+      "linebreak-style": "off"
     }
   },
   "prettier": "prettier-config-nick"
