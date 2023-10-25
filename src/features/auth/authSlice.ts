@@ -19,6 +19,7 @@ interface IinitialState {
   isLoading: boolean
   isError: boolean
   isSuccess: boolean
+  authenticated: boolean
   message: string | unknown
 }
 
@@ -31,6 +32,7 @@ const initialState: IinitialState = {
   isLoading: false,
   isError: false,
   isSuccess: false,
+  authenticated: false,
   message: "",
 }
 
@@ -77,6 +79,7 @@ export const authSlice = createSlice({
       state.isError = false
       state.isLoading = false
       state.isSuccess = false
+      state.authenticated = false
       state.message = ""
     },
   },
@@ -88,6 +91,7 @@ export const authSlice = createSlice({
       .addCase(signUp.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
+        state.authenticated = true
         state.user = action.payload
       })
       .addCase(signUp.rejected, (state, action) => {
@@ -102,6 +106,7 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
+        state.authenticated = true
         state.user = action.payload
       })
       .addCase(login.rejected, (state, action) => {
