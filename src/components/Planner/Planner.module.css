@@ -1,0 +1,17 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  max-width: 275px;
+}
+.calendarContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.appointmentContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
