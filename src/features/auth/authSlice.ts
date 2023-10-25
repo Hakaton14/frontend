@@ -40,7 +40,9 @@ export const signUp = createAsyncThunk(
   "auth/signIn",
   async (userData: IUser, thunkAPI) => {
     try {
-      return await authService.signUp(userData)
+      return authService
+        .signUp(userData)
+        .then(() => authService.login(userData))
     } catch (error) {
       const err = error as AxiosError
       return thunkAPI.rejectWithValue(err.response?.data)
@@ -54,9 +56,6 @@ export const login = createAsyncThunk(
   async (userData: IUser, thunkAPI) => {
     try {
       return await authService.login(userData)
-      //поменять когда будет работать сервер
-      // const { email, password } = userData
-      // return userData
     } catch (error) {
       const err = error as AxiosError
       return thunkAPI.rejectWithValue(err.response?.data)
