@@ -5,9 +5,9 @@ const API_URL = "http://127.0.0.1:8000/api/v1"
 
 //Регистрация пользователя
 //TODO Дописать типы юзера
-const signIn = async (userData: any) => {
+const signUp = async (userData: any) => {
   const response = await axios.post(`${API_URL}/users/`, userData)
-  response.data && localStorage.setItem("user", JSON.stringify(response.data))
+  // response.data && localStorage.setItem("user", JSON.stringify(response.data))
   return response.data
 }
 //Вход пользователя
@@ -29,7 +29,7 @@ const logout = async () => {
 }
 
 const authService = {
-  signIn,
+  signUp,
   login,
   logout,
 }

@@ -10,6 +10,8 @@ interface IUser {
   avatar?: string
   date_joined?: string
   password: string
+  access?: string
+  refresh?: string
 }
 
 interface IinitialState {
@@ -34,11 +36,11 @@ const initialState: IinitialState = {
 
 //Регистрация
 //TODO Доделать типизацию
-export const signIn = createAsyncThunk(
+export const signUp = createAsyncThunk(
   "auth/signIn",
   async (userData: IUser, thunkAPI) => {
     try {
-      return await authService.signIn(userData)
+      return await authService.signUp(userData)
     } catch (error) {
       const err = error as AxiosError
       return thunkAPI.rejectWithValue(err.response?.data)
@@ -81,15 +83,15 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(signIn.pending, (state) => {
+      .addCase(signUp.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(signIn.fulfilled, (state, action) => {
+      .addCase(signUp.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
         state.user = action.payload
       })
-      .addCase(signIn.rejected, (state, action) => {
+      .addCase(signUp.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

@@ -12,7 +12,7 @@ export const loginShema = yup.object().shape({
 })
 
 export const registrationShema = yup.object().shape({
-  firstName: yup
+  first_name: yup
     .string()
     .min(3, "Имя должно содержать минимум 3 знака")
     .max(50, "Имя не может быть длинее 50 знаков")
@@ -23,7 +23,7 @@ export const registrationShema = yup.object().shape({
     )
     .matches(/^[А-ЯЁа-яё]*$/, "Используйте только кириллические буквы")
     .required("Имя обязательно"),
-  lastName: yup
+  last_name: yup
     .string()
     .min(5, "Фамилия должна содержать минимум 3 знака")
     .max(50, "Фамилия не может быть длинее 50 знаков")
