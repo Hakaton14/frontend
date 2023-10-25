@@ -1,118 +1,104 @@
-// import styles from "./Header.module.scss"
-// import { alpha, makeStyles } from "@material-ui/core/styles"
-// import AppBar from "@material-ui/core/AppBar"
-// import Toolbar from "@material-ui/core/Toolbar"
-// import IconButton from "@material-ui/core/IconButton"
-// import Typography from "@material-ui/core/Typography"
-// import InputBase from "@material-ui/core/InputBase"
-// import SearchIcon from "@material-ui/icons/Search"
-// import AccountCircle from "@material-ui/icons/AccountCircle"
-// import MailIcon from "@material-ui/icons/Mail"
-// import NotificationsIcon from "@material-ui/icons/Notifications"
+import * as React from "react"
+import { styled, alpha } from "@mui/material/styles"
+// import { makeStyles } from "@material-ui/core/styles"
+import AppBar from "@mui/material/AppBar"
+import Box from "@mui/material/Box"
+import Toolbar from "@mui/material/Toolbar"
+import IconButton from "@mui/material/IconButton"
+import Typography from "@mui/material/Typography"
+import InputBase from "@mui/material/InputBase"
 
-// const useStyles = makeStyles((theme) => ({
-//   grow: {
-//     flexGrow: 1,
-//   },
-//   menuButton: {
-//     marginRight: theme.spacing(2),
-//   },
-//   title: {
-//     display: "none",
-//     [theme.breakpoints.up("sm")]: {
-//       display: "block",
-//     },
-//   },
-//   search: {
-//     position: "relative",
-//     borderRadius: theme.shape.borderRadius,
-//     backgroundColor: alpha(theme.palette.common.white, 0.15),
-//     "&:hover": {
-//       backgroundColor: alpha(theme.palette.common.white, 0.25),
-//     },
-//     marginRight: theme.spacing(2),
-//     marginLeft: 0,
-//     width: "100%",
-//     [theme.breakpoints.up("sm")]: {
-//       marginLeft: theme.spacing(3),
-//       width: "auto",
-//     },
-//   },
-//   searchIcon: {
-//     padding: theme.spacing(0, 2),
-//     height: "100%",
-//     position: "absolute",
-//     pointerEvents: "none",
-//     display: "flex",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-//   inputRoot: {
-//     color: "inherit",
-//   },
-//   inputInput: {
-//     padding: theme.spacing(1, 1, 1, 0),
-//     // vertical padding + font size from searchIcon
-//     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-//     transition: theme.transitions.create("width"),
-//     width: "100%",
-//     [theme.breakpoints.up("md")]: {
-//       width: "20ch",
-//     },
-//   },
-//   sectionDesktop: {
-//     display: "none",
-//     [theme.breakpoints.up("md")]: {
-//       display: "flex",
-//     },
-//   },
-//   sectionMobile: {
-//     display: "flex",
-//     [theme.breakpoints.up("md")]: {
-//       display: "none",
-//     },
-//   },
-// }))
+import SearchIcon from "../../ui-kit/icons/search.svg"
+import NotificationIcon from "../../ui-kit/icons/notification.png"
+import UserIcon from "../../ui-kit/icons/user.png"
+import GroupIcon from "../../ui-kit/icons/Group.png"
+import Logo from "../../ui-kit/icons/career-logo-1b10b20f 1.svg"
+
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(3),
+    width: "auto",
+  },
+}))
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}))
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+}))
 
 function Header() {
-  // const classes = useStyles()
-
   return (
-    <></>
-    // <div className={classes.grow}>
-    //   <AppBar position="static">
-    //     <Toolbar>
-    //       <Typography className={classes.title} variant="h6" noWrap>
-    //         Карьерный трекер
-    //       </Typography>
-    //       <div className={classes.search}>
-    //         <div className={classes.searchIcon}>
-    //           <SearchIcon />
-    //         </div>
-    //         <InputBase
-    //           placeholder="Поиск по названию вакансии"
-    //           classes={{
-    //             root: classes.inputRoot,
-    //             input: classes.inputInput,
-    //           }}
-    //           inputProps={{ "aria-label": "search" }}
-    //         />
-    //       </div>
-    //       <div className={classes.grow} />
-    //       <div className={classes.sectionDesktop}>
-    //         <IconButton>
-    //           <MailIcon />
-    //         </IconButton>
-    //         <IconButton>
-    //           <NotificationsIcon />
-    //         </IconButton>
-    //         <IconButton>
-    //           <AccountCircle />
-    //         </IconButton>
-    //       </div>
-    //     </Toolbar>
-    //   </AppBar>
-    // </div>
+    <Box sx={{ flexGrow: 1, maxWidth: "1440px" }}>
+      <AppBar position="static" style={{ backgroundColor: "#1A1B22" }}>
+        <Toolbar>
+          <img
+            src={Logo}
+            alt="Логотипs"
+            style={{ margin: "10px 148px 10px 83px" }}
+          />
+          <Search>
+            <SearchIconWrapper>
+              <img src={SearchIcon} alt="Иконка поиска" />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Поиск по названию вакансии"
+              style={{
+                width: "507px",
+                height: "40px",
+                // backgroundColor: "#FFF",
+              }}
+            />
+          </Search>
+          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <IconButton style={{ padding: "0", marginRight: "52px" }}>
+              <img src={UserIcon} alt="Иконка пользователя" />
+            </IconButton>
+            <IconButton
+              style={{
+                padding: "0",
+                marginRight: "52px",
+                width: "24px",
+                height: "24px",
+              }}
+            >
+              <img src={GroupIcon} alt="Иконка писем" />
+            </IconButton>
+            <IconButton style={{ padding: "0", width: "24px", height: "24px" }}>
+              <img src={NotificationIcon} alt="Иконка уведомлений" />
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+    </Box>
   )
 }
 
