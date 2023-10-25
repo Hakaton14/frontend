@@ -7,7 +7,8 @@ import { registrationShema } from "@Utils"
 import { yupResolver } from "@hookform/resolvers/yup"
 
 type formRegistration = {
-  fullName: string
+  firstName: string
+  lastName: string
   email: string
   password: string
 }
@@ -21,7 +22,7 @@ const Registration: FC = () => {
     resolver: yupResolver(registrationShema),
   })
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: formRegistration) => {
     console.log(data)
   }
 
@@ -33,11 +34,33 @@ const Registration: FC = () => {
         <div className={styles.input}>
           <Input
             type={"text"}
-            placeholder={"Фамилия и Имя"}
+            placeholder={"Имя"}
             register={register}
-            registerName={"fullName"}
-            error={!!errors.fullName}
-            helperText={errors.fullName?.message}
+            registerName={"firstName"}
+            error={!!errors.firstName}
+            helperText={errors.firstName?.message}
+          />
+        </div>
+
+        <div className={styles.input}>
+          <Input
+            type={"text"}
+            placeholder={"Фамилия"}
+            register={register}
+            registerName={"lastName"}
+            error={!!errors.lastName}
+            helperText={errors.lastName?.message}
+          />
+        </div>
+
+        <div className={styles.input}>
+          <Input
+            type={"phone"}
+            placeholder={"phone"}
+            register={register}
+            registerName={"phone"}
+            error={!!errors.phone}
+            helperText={errors.phone?.message}
           />
         </div>
 
@@ -64,7 +87,7 @@ const Registration: FC = () => {
         </div>
 
         <div className={styles.button}>
-          <Button type="submit" fullWidth variant="contained" size="medium">
+          <Button type="submit" variant="contained" size="medium" fullWidth>
             Зарегистрироваться
           </Button>
         </div>
