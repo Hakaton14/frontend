@@ -5,14 +5,11 @@ import { Input } from "@UI"
 import { loginShema } from "@Utils"
 import { login } from "@Features"
 import styles from "./Login.module.scss"
-import { useAppDispatch } from "@ReduxHooks"
-
+import { useAppDispatch, useAppSelector } from "@ReduxHooks"
+import { Link } from "react-router-dom"
+import { useNavigate } from "react-router"
+import { useEffect } from "react"
 interface Inputs {
-  email: string
-  password: string
-}
-
-type formLogin = {
   email: string
   password: string
 }
@@ -26,7 +23,14 @@ const Login = () => {
     resolver: yupResolver(loginShema),
   })
 
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const { user } = useAppSelector((state) => state.auth)
+
+  useEffect(() => {
+    if (user) navigate("/")
+  }, [user, navigate])
+
   const onSubmit = async (userData: Inputs) => {
     dispatch(login(userData))
   }
@@ -58,7 +62,13 @@ const Login = () => {
           />
         </div>
 
-        <div className={styles.Button}>
+        <div className={styles.button}>
+          <Button type="submit" variant="contained" size="medium" fullWidth>
+            Войти
+          </Button>
+        </div>
+
+        <div className={styles.button}>
           <Button
             type="submit"
             fullWidth
@@ -71,9 +81,9 @@ const Login = () => {
         </div>
       </form>
 
-      <div>
-        <span>Нет аккаунта?</span>
-        <a href="/sign-up">Зарегистрироваться</a>
+      <div className={styles.toolbar}>
+        <span>Нет аккаунта? </span>
+        <Link to="/sign-up">Зарегистрироваться</Link>
       </div>
     </div>
   )

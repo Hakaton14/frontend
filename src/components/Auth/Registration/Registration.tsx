@@ -7,7 +7,8 @@ import { registrationShema } from "@Utils"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useAppDispatch, useAppSelector } from "@ReduxHooks"
 import { login, signUp } from "@Features"
-
+import { Link } from "react-router-dom"
+import { useNavigate } from "react-router"
 type formRegistration = {
   first_name: string
   last_name: string
@@ -17,6 +18,7 @@ type formRegistration = {
 }
 
 const Registration: FC = () => {
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { isError, isSuccess, message, isLoading } = useAppSelector(
     (state) => state.auth,
@@ -31,8 +33,8 @@ const Registration: FC = () => {
   })
 
   useEffect(() => {
-    //редирект на логин
-  }, [isError, isSuccess, message])
+    if (isSuccess) navigate("/")
+  }, [isSuccess, navigate])
 
   const onSubmit = async (userData: formRegistration) => {
     await dispatch(signUp(userData))
@@ -106,8 +108,8 @@ const Registration: FC = () => {
       </form>
 
       <div className={styles.toolbar}>
-        <span>Есть учетная запись?</span>
-        <a href="/sign-in">Войти</a>
+        <span>Есть учетная запись? </span>
+        <Link to="/sign-in">Войти</Link>
       </div>
     </div>
   )
