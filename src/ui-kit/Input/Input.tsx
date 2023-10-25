@@ -38,7 +38,7 @@ const Input = (props: TextFieldProps & TInputProps) => {
 
   return (
     <>
-      {customLabel && <span className={styles.LabelСustom}>Custom</span>}
+      {customLabel && <span className={styles.LabelСustom}>{customLabel}</span>}
       <TextField {...register(`${registerName}`)} sx={sxStyles} {...rest} />
     </>
   )
