@@ -38,12 +38,12 @@ const initialState: IinitialState = {
 //Регистрация
 //TODO Доделать типизацию
 export const signUp = createAsyncThunk(
-  "auth/signIn",
+  "auth/signUp",
   async (userData: IUser, thunkAPI) => {
     try {
       return authService
         .signUp(userData)
-        .then(() => authService.login(userData))
+        .then((res) => authService.login(userData))
     } catch (error) {
       const err = error as AxiosError
       return thunkAPI.rejectWithValue(err.response?.data)
@@ -89,6 +89,7 @@ export const authSlice = createSlice({
       .addCase(signUp.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
+        state.user = action.payload
       })
       .addCase(signUp.rejected, (state, action) => {
         state.isLoading = false

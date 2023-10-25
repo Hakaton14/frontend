@@ -20,9 +20,7 @@ type formRegistration = {
 const Registration: FC = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const { isError, isSuccess, message, isLoading } = useAppSelector(
-    (state) => state.auth,
-  )
+  const { user, isSuccess, isError } = useAppSelector((state) => state.auth)
 
   const {
     register,
@@ -33,8 +31,8 @@ const Registration: FC = () => {
   })
 
   useEffect(() => {
-    if (isSuccess) navigate("/")
-  }, [isSuccess, navigate])
+    if (user) navigate("/")
+  }, [user, navigate])
 
   const onSubmit = async (userData: formRegistration) => {
     await dispatch(signUp(userData))
