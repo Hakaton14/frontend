@@ -1,5 +1,7 @@
 .container {
   margin: 0 83px 0 83px;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {

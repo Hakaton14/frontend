@@ -8,6 +8,7 @@ import { useState } from "react"
 
 const calendarHeaderPropsStyles = {
   sx: {
+    ".MuiDateCalendar-root": { margin: "0" },
     ".MuiPickersCalendarHeader-root": {
       display: "flex",
       alignItems: "center",

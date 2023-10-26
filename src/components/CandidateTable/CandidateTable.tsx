@@ -3,10 +3,11 @@ import styles from "./CandidateTable.module.scss"
 import Accordion from "@mui/material/Accordion"
 import AccordionSummary from "@mui/material/AccordionSummary"
 import AccordionDetails from "@mui/material/AccordionDetails"
-import Typography from "@mui/material/Typography"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import LinearProgress from "@mui/material/LinearProgress"
 import { Button } from "@mui/material"
+
+import CandidatInfoTable from "../CandidatInfoTable/CandidatInfoTable"
 
 import PencilIcon from "../../ui-kit/icons/pencil-1.svg"
 import FolderIcon from "../../ui-kit/icons/folder.svg"
@@ -103,38 +104,10 @@ function CandidateTable() {
           </div>
         </AccordionSummary>
 
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+        <AccordionDetails sx={{ padding: "24px 24px" }}>
+          <CandidatInfoTable />
         </AccordionDetails>
       </Accordion>
-
-      {/* <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Accordion 2</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion disabled>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3a-content"
-          id="panel3a-header"
-        >
-          <Typography>Disabled Accordion</Typography>
-        </AccordionSummary>
-      </Accordion> */}
     </div>
   )
 }
