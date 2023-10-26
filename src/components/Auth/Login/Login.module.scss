@@ -1,9 +1,11 @@
-.container {}
+.container {
+  width: 100%;
+}
 
 .title {
-    color: #000000;
+    color: #797981;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 24px;
     letter-spacing: 0em;
     text-align: center;
@@ -12,4 +14,7 @@
 
 .input, .button {
     margin: 0 0 28px 0;
+}
+.toolbar {
+  text-align: center;
 }

@@ -19,6 +19,7 @@ interface IinitialState {
   isLoading: boolean
   isError: boolean
   isSuccess: boolean
+
   message: string | unknown
 }
 
@@ -37,12 +38,12 @@ const initialState: IinitialState = {
 //Регистрация
 //TODO Доделать типизацию
 export const signUp = createAsyncThunk(
-  "auth/signIn",
+  "auth/signUp",
   async (userData: IUser, thunkAPI) => {
     try {
       return authService
         .signUp(userData)
-        .then(() => authService.login(userData))
+        .then((res) => authService.login(userData))
     } catch (error) {
       const err = error as AxiosError
       return thunkAPI.rejectWithValue(err.response?.data)
