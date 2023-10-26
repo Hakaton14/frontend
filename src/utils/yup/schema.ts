@@ -69,3 +69,22 @@ export const registrationShema = yup.object().shape({
     )
     .required("Телефон обязателен для заполнения"),
 })
+
+export const vacancyShema = yup.object().shape({
+  vacName: yup.string().required("Заполните поле"),
+  specialization: yup.string().required("Заполните поле"),
+  skills: yup.string().required("Заполните поле"),
+  grade: yup.string().required("Заполните поле"),
+  radioOfficeAddress: yup.boolean().required("Заполните поле"),
+  officeAdress: yup.string(),
+  city: yup.string().required("Заполните поле"),
+  salaryFrom: yup.string(),
+  salaryTo: yup.string(),
+  currencySelect: yup.string(),
+  responsibility: yup.string().required("Заполните поле"),
+  requirement: yup.string().required("Заполните поле"),
+  condition: yup.string().required("Заполните поле"),
+  lang: yup.string().required("Заполните поле"),
+  langGrade: yup.string().required("Заполните поле"),
+  workHours: yup.string().required("Заполните поле"),
+})

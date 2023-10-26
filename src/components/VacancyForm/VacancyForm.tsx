@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
-import { registrationShema } from "@Utils"
+import { vacancyShema } from "@Utils"
 import { Input } from "@UI"
 import {
   FormControl,
@@ -13,21 +13,36 @@ import {
   RadioGroup,
   Select,
   Button,
+  TextField,
 } from "@mui/material"
-
-function VacancyForm() {
+import { Fragment, useEffect } from "react"
+type VacancyFormProps = {
+  tab: number
+}
+function VacancyForm({ tab }: VacancyFormProps) {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(registrationShema),
+    resolver: yupResolver(vacancyShema),
+    defaultValues: {
+      responsibility: "",
+    },
   })
 
-  return (
-    <form noValidate>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) =>
+      console.log(value, name, type),
+    )
+    return () => subscription.unsubscribe()
+  }, [watch])
+
+  const MainFields = () => (
+    <Fragment>
+      <Grid container spacing={4} justifyContent={"center"}>
+        <Grid item xs={5}>
           <Grid item xs={12} pb={1}>
             <Input
               customLabel="Название Вакансии"
@@ -56,65 +71,105 @@ function VacancyForm() {
               type={"text"}
               placeholder={"Например, Material Design 3"}
               register={register}
-              registerName={"skill"}
-              error={!!errors.skill}
-              helperText={errors.skill?.message}
+              registerName={"skills"}
+              error={!!errors.skills}
+              helperText={errors.skills?.message}
             />
           </Grid>
-          <FormControl>
-            <FormLabel id="skills-radio-buttons-group-label">
-              Опыт работы
-            </FormLabel>
-            <RadioGroup
-              aria-labelledby="skills-radio-buttons-group-label"
-              defaultValue="Нет опыта"
-              name="radio-buttons-group"
-            >
-              <FormControlLabel
-                value="Нет опыта"
-                control={<Radio />}
-                label="Нет опыта"
+          <Grid item xs={12} pb={1}>
+            <FormControl>
+              <FormLabel id="skills-radio-buttons-group-label">
+                Опыт работы
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="skills-radio-buttons-group-label"
+                defaultValue="Нет опыта"
+                name="radio-buttons-group"
+              >
+                <FormControlLabel
+                  {...register("grade")}
+                  value="intern"
+                  control={<Radio />}
+                  label="Нет опыта"
+                />
+                <FormControlLabel
+                  {...register("grade")}
+                  value="junior"
+                  control={<Radio />}
+                  label="от 1 года до 3 лет"
+                />
+                <FormControlLabel
+                  {...register("grade")}
+                  value="middle"
+                  control={<Radio />}
+                  label="от 3 года до 6 лет"
+                />
+                <FormControlLabel
+                  {...register("grade")}
+                  value="senior"
+                  control={<Radio />}
+                  label="более 6 лет"
+                />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <FormControl fullWidth>
+              <FormLabel id="office-radio-buttons-group-label">
+                Адрес основного офиса
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="office-radio-buttons-group-label"
+                defaultValue="Не указывать адрес"
+                name="radio-buttons-group"
+              >
+                <FormControlLabel
+                  {...register("radioOfficeAddress")}
+                  value={false}
+                  control={<Radio />}
+                  label="Не указывать адрес"
+                />
+                <FormControlLabel
+                  {...register("radioOfficeAddress")}
+                  value={true}
+                  control={<Radio />}
+                  label="Указать адрес"
+                />
+              </RadioGroup>
+              <Input
+                disabled
+                type={"text"}
+                placeholder={"Адрес офиса"}
+                register={register}
+                registerName={"officeAdress"}
+                error={!!errors.officeAdress}
+                helperText={errors.officeAdress?.message}
               />
-              <FormControlLabel
-                value="от 1 года до 3 лет"
-                control={<Radio />}
-                label="от 1 года до 3 лет"
-              />
-              <FormControlLabel
-                value="от 3 года до 6 лет"
-                control={<Radio />}
-                label="от 3 года до 6 лет"
-              />
-              <FormControlLabel
-                value="более 6 лет "
-                control={<Radio />}
-                label="более 6 лет"
-              />
-            </RadioGroup>
-          </FormControl>
+            </FormControl>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={5}>
           <Grid container spacing={2}>
             <Grid item xs={4} pb={1}>
               <Input
                 customLabel="Зарплата"
-                type={"text"}
+                type={"number"}
                 placeholder={"От"}
                 register={register}
-                registerName={"city"}
-                error={!!errors.city}
-                helperText={errors.city?.message}
+                registerName={"salaryFrom"}
+                error={!!errors.salaryFrom}
+                helperText={errors.salaryFrom?.message}
               />
             </Grid>
             <Grid item xs={4}>
               <Input
                 customLabel="."
-                type={"text"}
+                type={"number"}
                 placeholder={"До"}
                 register={register}
-                registerName={"city"}
-                error={!!errors.city}
-                helperText={errors.city?.message}
+                registerName={"salaryTo"}
+                error={!!errors.salaryTo}
+                helperText={errors.salaryTo?.message}
               />
             </Grid>
             <Grid
@@ -123,11 +178,13 @@ function VacancyForm() {
               sx={{ display: "flex", alignItems: "flex-end" }}
               pb={1}
             >
-              <FormControl sx={{ minWidth: 141 }} size="small">
+              <FormControl sx={{ minWidth: 111 }} size="small">
                 <InputLabel id="currency_select_id_label">Валюта</InputLabel>
                 <Select
+                  {...register("currencySelect")}
                   labelId="currency_select_id_label"
-                  id="currency_select"
+                  id="currencySelect"
+                  defaultValue={"rub"}
                   label="Валюта"
                   fullWidth
                 >
@@ -151,11 +208,11 @@ function VacancyForm() {
           </Grid>
           <Grid item xs={12} pb={1}>
             <Input
-              multiline
-              rows={2}
+              fullWidth
+              multiline={true}
+              maxRows={2}
               customLabel="Обязанности"
               type={"text"}
-              placeholder={"Введите основные обязанности вакансии"}
               register={register}
               registerName={"responsibility"}
               error={!!errors.responsibility}
@@ -164,11 +221,12 @@ function VacancyForm() {
           </Grid>
           <Grid item xs={12} pb={1}>
             <Input
-              multiline
+              fullWidth
+              multiline={true}
               rows={2}
               customLabel="Требования"
               type={"text"}
-              placeholder={"Введите основные требования вакансии"}
+              // placeholder={"Введите основные требования вакансии"}
               register={register}
               registerName={"requirement"}
               error={!!errors.requirement}
@@ -177,11 +235,12 @@ function VacancyForm() {
           </Grid>
           <Grid item xs={12}>
             <Input
-              multiline
+              fullWidth
+              multiline={true}
               rows={2}
               customLabel="Условия"
               type={"text"}
-              placeholder={"Например, Material Design 3"}
+              // placeholder={"Например, Material Design 3"}
               register={register}
               registerName={"condition"}
               error={!!errors.condition}
@@ -190,7 +249,155 @@ function VacancyForm() {
           </Grid>
         </Grid>
       </Grid>
-      <Button>Опубликовать</Button>
+    </Fragment>
+  )
+
+  const Aditionalields = () => (
+    <Fragment>
+      <Grid container spacing={2} justifyContent={"center"}>
+        <Grid item xs={4} pb={1}>
+          <FormControl>
+            <FormLabel id="workload-radio-buttons-group-label">
+              Тип занятости
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="workload-radio-buttons-group-label"
+              defaultValue="Полная занятость"
+              name="radio-buttons-group"
+            >
+              <FormControlLabel
+                {...register("grade")}
+                value="fullTime"
+                control={<Radio />}
+                label="Полная занятость"
+              />
+              <FormControlLabel
+                {...register("grade")}
+                value="partTime"
+                control={<Radio />}
+                label="Частичная занятость"
+              />
+              <FormControlLabel
+                {...register("grade")}
+                value="project"
+                control={<Radio />}
+                label="Проектная работа"
+              />
+              <FormControlLabel
+                {...register("grade")}
+                value="intenship"
+                control={<Radio />}
+                label="Стажировка"
+              />
+              <FormControlLabel
+                {...register("grade")}
+                value="volunteer"
+                control={<Radio />}
+                label="Волонтерство"
+              />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+        <Grid item xs={4} pb={1}>
+          <FormControl>
+            <FormLabel id="workHours-radio-buttons-group-label">
+              График работы
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="workHours-radio-buttons-group-label"
+              defaultValue="Полная занятость"
+              name="radio-buttons-group"
+            >
+              <FormControlLabel
+                {...register("workHours")}
+                value="52"
+                control={<Radio />}
+                label="5/2"
+              />
+              <FormControlLabel
+                {...register("workHours")}
+                value="61"
+                control={<Radio />}
+                label="6/1"
+              />
+              <FormControlLabel
+                {...register("workHours")}
+                value="gibki"
+                control={<Radio />}
+                label="Гибкий график"
+              />
+              <FormControlLabel
+                {...register("workHours")}
+                value="smeni"
+                control={<Radio />}
+                label="Сменный график"
+              />
+              <FormControlLabel
+                {...register("workHours")}
+                value="remote"
+                control={<Radio />}
+                label="Удаленкао"
+              />
+              <FormControlLabel
+                {...register("workHours")}
+                value="vahta"
+                control={<Radio />}
+                label="Вахтовый метод"
+              />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+        <Grid item xs={6}>
+          <Input
+            customLabel="Знание иностранных языков"
+            type={"text"}
+            placeholder={"Выберите язык"}
+            register={register}
+            registerName={"lang"}
+            error={!!errors.lang}
+            helperText={errors.lang?.message}
+          />
+        </Grid>
+        <Grid item xs={4} sx={{ display: "flex", alignItems: "flex-end" }}>
+          <FormControl sx={{ minWidth: 141 }} size="small">
+            <InputLabel id="langGrade_select_id_label">
+              Уровень владения
+            </InputLabel>
+            <Select
+              {...register("langGrade")}
+              labelId="langGrade_select_id_label"
+              id="langGradeSelect"
+              defaultValue={"b1"}
+              label="Уровень владения"
+              fullWidth
+            >
+              <MenuItem value={"b1"}>B1</MenuItem>
+              <MenuItem value={"b2"}>B2</MenuItem>
+              <MenuItem value={"c1"}>C1</MenuItem>
+              <MenuItem value={"c2"}>C2</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
+    </Fragment>
+  )
+
+  return (
+    <form noValidate onSubmit={handleSubmit(() => console.log("first"))}>
+      {tab ? <Aditionalields /> : <MainFields />}
+
+      <Grid container justifyContent={"center"} mt={4}>
+        <Grid item xs={3}>
+          <Button type="submit" variant="contained" color="info">
+            Опубликовать
+          </Button>
+        </Grid>
+        <Grid item xs={3}>
+          <Button type="submit" variant="outlined">
+            Сохранить шаблон
+          </Button>
+        </Grid>
+      </Grid>
     </form>
   )
 }
