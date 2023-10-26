@@ -55,7 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Header() {
   return (
     <Box sx={{ flexGrow: 1, Width: "100%" }}>
-      <AppBar position="static" style={{ backgroundColor: "#1A1B22" }}>
+      <AppBar position="static" sx={{ backgroundColor: "#1A1B22" }}>
         <Toolbar>
           <img
             src={Logo}
@@ -68,7 +68,7 @@ function Header() {
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Поиск по названию вакансии"
-              style={{
+              sx={{
                 width: "507px",
                 height: "40px",
                 // backgroundColor: "#FFF",
@@ -77,11 +77,11 @@ function Header() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton style={{ padding: "0", marginRight: "52px" }}>
+            <IconButton sx={{ padding: "0", marginRight: "52px" }}>
               <img src={UserIcon} alt="Иконка пользователя" />
             </IconButton>
             <IconButton
-              style={{
+              sx={{
                 padding: "0",
                 marginRight: "52px",
                 width: "24px",
@@ -90,7 +90,7 @@ function Header() {
             >
               <img src={GroupIcon} alt="Иконка писем" />
             </IconButton>
-            <IconButton style={{ padding: "0", width: "24px", height: "24px" }}>
+            <IconButton sx={{ padding: "0", width: "24px", height: "24px" }}>
               <img src={NotificationIcon} alt="Иконка уведомлений" />
             </IconButton>
           </Box>

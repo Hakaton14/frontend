@@ -1,6 +1,7 @@
 import { FC } from "react"
 import styles from "./MainScreen.module.scss"
 import Header from "../Header/Header"
+import CandidateTable from "../CandidateTable/CandidateTable"
 import { Button } from "@mui/material"
 import AddIcon from "../../ui-kit/icons/add.svg"
 
@@ -47,6 +48,12 @@ const MainScreen: FC = () => {
           <Button
             sx={{
               padding: "0",
+              paddingRight: "60px",
+              fontSize: "20px",
+              lineHeight: "24px",
+              fontWeight: "500",
+              color: "#1A1B22",
+              textTransform: "none",
             }}
           >
             Активные (3)
@@ -54,6 +61,12 @@ const MainScreen: FC = () => {
           <Button
             sx={{
               padding: "0",
+              paddingRight: "60px",
+              fontSize: "20px",
+              lineHeight: "24px",
+              fontWeight: "500",
+              color: "#797981",
+              textTransform: "none",
             }}
           >
             Архив (0)
@@ -61,11 +74,18 @@ const MainScreen: FC = () => {
           <Button
             sx={{
               padding: "0",
+              fontSize: "20px",
+              lineHeight: "24px",
+              fontWeight: "500",
+              color: "#797981",
+              textTransform: "none",
             }}
           >
             Шаблоны (0)
           </Button>
         </div>
+
+        <CandidateTable />
       </div>
     </>
   )
