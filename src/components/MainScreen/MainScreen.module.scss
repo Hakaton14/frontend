@@ -1,5 +1,23 @@
 .container {
-  // width: 1440px;
-  // max-height: 80px;
-  // background-color: #1a1b22;
+  margin: 0 83px 0 83px;
+}
+
+.title {
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px;
+  margin: 60px 0 56px 0;
+}
+
+.buttonWrapper {
+  margin-bottom: 24px;
+}
+
+.tableButtonWrapper {
+  margin-bottom: 28px;
+}
+
+.addIcon {
+  padding-right: 4px;
 }
