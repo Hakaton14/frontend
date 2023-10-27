@@ -1,20 +1,22 @@
+import { useEffect } from "react"
+import { useChangeTitle } from "@Hooks"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { Button } from "@mui/material"
 import { Input } from "@UI"
 import { loginShema } from "@Utils"
 import { login } from "@Features"
-import styles from "./Login.module.scss"
 import { useAppDispatch, useAppSelector } from "@ReduxHooks"
-import { Link } from "react-router-dom"
-import { useNavigate } from "react-router"
-import { useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import styles from "./Login.module.scss"
+
 interface Inputs {
   email: string
   password: string
 }
 
 const Login = () => {
+  useChangeTitle("Авторизация")
   const {
     register,
     handleSubmit,
