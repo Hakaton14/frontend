@@ -9,19 +9,28 @@ enum ETypeNotification {
   succes,
 }
 
+type TMessage = {
+  title?: string
+  description?: string
+}
 type TTypeNotification = keyof typeof ETypeNotification
 
 export type NotificationProps = {
+  message: TMessage
   typeNotification: TTypeNotification
 }
 
 const Notification = (props: SnackbarProps & NotificationProps) => {
-  const { typeNotification, ...rest } = props
+  const { typeNotification, message, ...rest } = props
 
   return (
     <Snackbar {...rest}>
       <div className={styles.MessageContainer}>
-        {typeNotification === "error" ? <Error /> : <Succes />}
+        {typeNotification === "error" ? (
+          <Error title={message.title} description={message.description} />
+        ) : (
+          <Succes title={message.title} description={message.description} />
+        )}
       </div>
     </Snackbar>
   )
