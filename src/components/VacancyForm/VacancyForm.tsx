@@ -13,9 +13,12 @@ import {
   RadioGroup,
   Select,
   Button,
-  TextField,
+  Autocomplete,
 } from "@mui/material"
-import { Fragment, useEffect } from "react"
+import { Fragment, useEffect, useState } from "react"
+import { getCity, getCurrency } from "@Features"
+import { useAppDispatch, useAppSelector } from "@ReduxHooks"
+
 type VacancyFormProps = {
   tab: number
 }
@@ -27,17 +30,34 @@ function VacancyForm({ tab }: VacancyFormProps) {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(vacancyShema),
-    defaultValues: {
-      responsibility: "",
-    },
   })
+  // const [options, setOptions] = useState<string[]>([])
+  // const [currencyOpts, setCurrencyOpts] = useState<object[]>([])
+
+  const dispatch = useAppDispatch()
+  const { cityOpt } = useAppSelector((state) => state.filters)
+
+  // const onChangehandle = async (value: any) => {
+  //   dispatch(getCity())
+  // }
 
   useEffect(() => {
-    const subscription = watch((value, { name, type }) =>
-      console.log(value, name, type),
-    )
+    const subscription = watch((value, { name, type }) => {
+      console.log(value, name, type)
+    })
     return () => subscription.unsubscribe()
   }, [watch])
+
+  useEffect(() => {
+    dispatch(getCurrency())
+    dispatch(getCity())
+  }, [])
+
+  // useEffect(() => {
+  //   const currencyList = dispatch(getCurrency())
+  //   setCurrencyOpts(currencyList)
+  //   return () => {}
+  // }, [])
 
   const MainFields = () => (
     <Fragment>
@@ -49,20 +69,9 @@ function VacancyForm({ tab }: VacancyFormProps) {
               type={"text"}
               placeholder={"Введите название вакансии"}
               register={register}
-              registerName={"vacName"}
-              error={!!errors.vacName}
-              helperText={errors.vacName?.message}
-            />
-          </Grid>
-          <Grid item xs={12} pb={1}>
-            <Input
-              customLabel="Специализация"
-              type={"text"}
-              placeholder={"Введите специализацию вакансии"}
-              register={register}
-              registerName={"specialization"}
-              error={!!errors.specialization}
-              helperText={errors.specialization?.message}
+              registerName={"name"}
+              error={!!errors.name}
+              helperText={errors.name?.message}
             />
           </Grid>
           <Grid item xs={12} pb={1}>
@@ -83,30 +92,30 @@ function VacancyForm({ tab }: VacancyFormProps) {
               </FormLabel>
               <RadioGroup
                 aria-labelledby="skills-radio-buttons-group-label"
-                defaultValue="Нет опыта"
+                defaultValue="0"
                 name="radio-buttons-group"
               >
                 <FormControlLabel
-                  {...register("grade")}
-                  value="intern"
+                  {...register("experience")}
+                  value="0"
                   control={<Radio />}
                   label="Нет опыта"
                 />
                 <FormControlLabel
-                  {...register("grade")}
-                  value="junior"
+                  {...register("experience")}
+                  value="1"
                   control={<Radio />}
                   label="от 1 года до 3 лет"
                 />
                 <FormControlLabel
-                  {...register("grade")}
-                  value="middle"
+                  {...register("experience")}
+                  value="2"
                   control={<Radio />}
                   label="от 3 года до 6 лет"
                 />
                 <FormControlLabel
-                  {...register("grade")}
-                  value="senior"
+                  {...register("experience")}
+                  value="3"
                   control={<Radio />}
                   label="более 6 лет"
                 />
@@ -141,9 +150,9 @@ function VacancyForm({ tab }: VacancyFormProps) {
                 type={"text"}
                 placeholder={"Адрес офиса"}
                 register={register}
-                registerName={"officeAdress"}
-                error={!!errors.officeAdress}
-                helperText={errors.officeAdress?.message}
+                registerName={"address"}
+                error={!!errors.address}
+                helperText={errors.address?.message}
               />
             </FormControl>
           </Grid>
@@ -156,9 +165,10 @@ function VacancyForm({ tab }: VacancyFormProps) {
                 type={"number"}
                 placeholder={"От"}
                 register={register}
-                registerName={"salaryFrom"}
-                error={!!errors.salaryFrom}
-                helperText={errors.salaryFrom?.message}
+                registerName={"salary_from"}
+                registerOptions={{ valueAsNumber: true }}
+                error={!!errors.salary_from}
+                helperText={errors.salary_from?.message}
               />
             </Grid>
             <Grid item xs={4}>
@@ -167,9 +177,10 @@ function VacancyForm({ tab }: VacancyFormProps) {
                 type={"number"}
                 placeholder={"До"}
                 register={register}
-                registerName={"salaryTo"}
-                error={!!errors.salaryTo}
-                helperText={errors.salaryTo?.message}
+                registerOptions={{ valueAsNumber: true }}
+                registerName={"salary_to"}
+                error={!!errors.salary_to}
+                helperText={errors.salary_to?.message}
               />
             </Grid>
             <Grid
@@ -181,22 +192,39 @@ function VacancyForm({ tab }: VacancyFormProps) {
               <FormControl sx={{ minWidth: 111 }} size="small">
                 <InputLabel id="currency_select_id_label">Валюта</InputLabel>
                 <Select
-                  {...register("currencySelect")}
+                  {...register("currency")}
                   labelId="currency_select_id_label"
-                  id="currencySelect"
-                  defaultValue={"rub"}
+                  id="currency"
+                  defaultValue={0}
                   label="Валюта"
                   fullWidth
                 >
-                  <MenuItem value={"rub"}>Рубли</MenuItem>
-                  <MenuItem value={"usd"}>Доллары</MenuItem>
-                  <MenuItem value={"eur"}>Евро</MenuItem>
+                  {}
+                  <MenuItem value={0}>Рубли</MenuItem>
+                  <MenuItem value={1}>Доллары</MenuItem>
+                  <MenuItem value={2}>Евро</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
           </Grid>
           <Grid item xs={12} pb={1}>
-            <Input
+            <Autocomplete
+              options={cityOpt}
+              getOptionLabel={(cityOpt) => cityOpt.name}
+              renderInput={(params) => (
+                <Input
+                  {...params}
+                  customLabel="В каком городе опубликовать вакансию"
+                  type={"text"}
+                  placeholder={"Укажите города для размещения"}
+                  register={register}
+                  registerName={"city"}
+                  error={!!errors.city}
+                  helperText={errors.city?.message}
+                />
+              )}
+            />
+            {/* <Input
               customLabel="В каком городе опубликовать вакансию"
               type={"text"}
               placeholder={"Укажите города для размещения"}
@@ -204,7 +232,7 @@ function VacancyForm({ tab }: VacancyFormProps) {
               registerName={"city"}
               error={!!errors.city}
               helperText={errors.city?.message}
-            />
+            /> */}
           </Grid>
           <Grid item xs={12} pb={1}>
             <Input
@@ -214,9 +242,9 @@ function VacancyForm({ tab }: VacancyFormProps) {
               customLabel="Обязанности"
               type={"text"}
               register={register}
-              registerName={"responsibility"}
-              error={!!errors.responsibility}
-              helperText={errors.responsibility?.message}
+              registerName={"responsibilities"}
+              error={!!errors.responsibilities}
+              helperText={errors.responsibilities?.message}
             />
           </Grid>
           <Grid item xs={12} pb={1}>
@@ -242,9 +270,9 @@ function VacancyForm({ tab }: VacancyFormProps) {
               type={"text"}
               // placeholder={"Например, Material Design 3"}
               register={register}
-              registerName={"condition"}
-              error={!!errors.condition}
-              helperText={errors.condition?.message}
+              registerName={"conditions"}
+              error={!!errors.conditions}
+              helperText={errors.conditions?.message}
             />
           </Grid>
         </Grid>
@@ -266,31 +294,31 @@ function VacancyForm({ tab }: VacancyFormProps) {
               name="radio-buttons-group"
             >
               <FormControlLabel
-                {...register("grade")}
+                {...register("workload")}
                 value="fullTime"
                 control={<Radio />}
                 label="Полная занятость"
               />
               <FormControlLabel
-                {...register("grade")}
+                {...register("workload")}
                 value="partTime"
                 control={<Radio />}
                 label="Частичная занятость"
               />
               <FormControlLabel
-                {...register("grade")}
+                {...register("workload")}
                 value="project"
                 control={<Radio />}
                 label="Проектная работа"
               />
               <FormControlLabel
-                {...register("grade")}
+                {...register("workload")}
                 value="intenship"
                 control={<Radio />}
                 label="Стажировка"
               />
               <FormControlLabel
-                {...register("grade")}
+                {...register("workload")}
                 value="volunteer"
                 control={<Radio />}
                 label="Волонтерство"
