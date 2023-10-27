@@ -1,6 +1,7 @@
 import {
   Avatar,
   Button,
+  IconButton,
   MenuItem,
   Paper,
   Table,
@@ -13,6 +14,7 @@ import {
 } from "@mui/material"
 
 import AvatarIcon from "../../ui-kit/icons/avatar.svg"
+import TrashIcon from "../../ui-kit/icons/trashBox.svg"
 
 function createData(
   number: number,
@@ -37,11 +39,11 @@ const rows = [
 const currencies = [
   {
     value: "Проходит ТЗ",
-    // label: "$",
+    label: "Проходит ТЗ",
   },
   {
     value: "Собеседование с HR",
-    // label: "€",
+    label: "Собеседование с HR",
   },
 ]
 
@@ -52,17 +54,21 @@ function CandidatInfoTable() {
         <TableHead>
           <TableRow>
             <TableCell
-            // sx={{
-            //   fontSize: "14px",
-            //   fontStyle: "normal",
-            //   fontWeight: "500",
-            //   lineHeight: "20px",
-            //   color: "#1A1B22",
-            // }}
+              sx={{
+                width: "48px",
+                height: "58px",
+                padding: "0",
+                textAlign: "center",
+              }}
             >
               #
             </TableCell>
-            <TableCell align="left">Кандидат</TableCell>
+            <TableCell
+              align="left"
+              sx={{ width: "293px", height: "58px", padding: "0" }}
+            >
+              Кандидат
+            </TableCell>
             <TableCell align="left">Статус трудоустройства</TableCell>
             <TableCell align="left">Учебный статус</TableCell>
             {/* <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
@@ -92,8 +98,7 @@ function CandidatInfoTable() {
                 />
                 {row.name}
               </TableCell>
-              <TableCell align="left">
-                {/* {row.workStatus} */}
+              <TableCell align="left" sx={{ padding: "0", width: "283px" }}>
                 <TextField
                   id="outlined-select-currency"
                   select
@@ -102,20 +107,43 @@ function CandidatInfoTable() {
                   // helperText="Please select your currency"
                   sx={{
                     width: "242px",
-                    height: "48px",
                     border: "none",
-                    // padding: "9px 14px",
+                    padding: "0",
+                    "& .MuiFormControl-root": {
+                      padding: "15px 32.5px 13px 14.65px",
+                    },
+                    "& .MuiOutlinedInput-input": {
+                      padding: "10px 14.65px",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
                   }}
                 >
                   {currencies.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
-                      {/* {option.label} */}
+                      {option.label}
                     </MenuItem>
                   ))}
                 </TextField>
               </TableCell>
-              <TableCell align="left">{row.staduStatus}</TableCell>
-              {/* <TableCell align="right">{row.staduStatus}</TableCell> */}
+              <TableCell
+                // align="space-between"
+                sx={{
+                  padding: "0",
+                  width: "210px",
+                  // justifyContent: "space-between",
+                }}
+              >
+                {row.staduStatus}
+                <IconButton aria-label="delete" sx={{ marginLeft: "10px" }}>
+                  <img src={TrashIcon} alt="Иконка корзины" />
+                </IconButton>
+              </TableCell>
+              {/* <TableCell align="left" sx={{ padding: "0" }}>
+
+              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>
