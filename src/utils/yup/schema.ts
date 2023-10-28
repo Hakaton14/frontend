@@ -85,6 +85,6 @@ export const vacancyShema = yup.object().shape({
   conditions: yup.string().required("Заполните поле"),
   lang: yup.string(),
   langGrade: yup.string(),
-  workload: yup.string(),
-  workHours: yup.string(),
+  employments: yup.string(),
+  schedule: yup.string(),
 })

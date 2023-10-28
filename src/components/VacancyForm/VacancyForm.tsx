@@ -16,7 +16,14 @@ import {
   Autocomplete,
 } from "@mui/material"
 import { Fragment, SyntheticEvent, useEffect, useState } from "react"
-import { getCity, getCurrency } from "@Features"
+import {
+  getCity,
+  getCurrency,
+  getEmployments,
+  getExperiences,
+  getSchedules,
+  getSkills,
+} from "@Features"
 import { useAppDispatch, useAppSelector } from "@ReduxHooks"
 import { createVacancy } from "@Features"
 
@@ -42,16 +49,21 @@ function VacancyForm({ tab }: VacancyFormProps) {
   // const [currencyOpts, setCurrencyOpts] = useState<object[]>([])
 
   const dispatch = useAppDispatch()
-  const { cityOpt } = useAppSelector((state) => state.filters)
+  const {
+    cityOpt,
+    skillsOpt,
+    currencyOpt,
+    schedulesOpt,
+    experienceOpt,
+    empolymentsOpt,
+  } = useAppSelector((state) => state.filters)
 
   // const onChangehandle = async (value: any) => {
   //   dispatch(getCity())
   // }
 
   const [selectedCity, setSelectedCity] = useState<TSelectedOpt | null>(null)
-  const [selectedSkills, setSelectedSkills] = useState<TSelectedOpt[] | null>(
-    null,
-  )
+  const [selectedSkills, setSelectedSkills] = useState<TSelectedOpt[]>([])
 
   const handleCityChange = (
     evt: SyntheticEvent,
@@ -63,15 +75,12 @@ function VacancyForm({ tab }: VacancyFormProps) {
       setSelectedCity(null)
     }
   }
+
   const handleSkillsChange = (
     evt: SyntheticEvent,
-    selectedSkill: TSelectedOpt | null,
+    selectedSkill: TSelectedOpt[],
   ) => {
-    if (selectedSkill) {
-      setSelectedSkills((prev) => console.log(selectedSkill) )
-    } else {
-      setSelectedSkills(null)
-    }
+    setSelectedSkills([...selectedSkill])
   }
 
   // const onSubmit = (evt: SyntheticEvent) => {
@@ -87,6 +96,10 @@ function VacancyForm({ tab }: VacancyFormProps) {
   useEffect(() => {
     dispatch(getCurrency())
     dispatch(getCity())
+    dispatch(getSkills())
+    dispatch(getSchedules())
+    dispatch(getEmployments())
+    dispatch(getExperiences())
   }, [])
 
   const MainFields = () => (
@@ -107,16 +120,23 @@ function VacancyForm({ tab }: VacancyFormProps) {
           <Grid item xs={12} pb={1}>
             <Autocomplete
               multiple
-              options={cityOpt}
-              getOptionLabel={(cityOpt) => cityOpt.name}
+              options={skillsOpt}
+              getOptionLabel={(skillsOpt) => skillsOpt.name}
+              // isOptionEqualToValue={(option, value) => option.id === value.id}
               onChange={handleSkillsChange}
+              value={selectedSkills}
+              filterSelectedOptions
               noOptionsText={"Нет подходящих вариантов"}
               renderInput={(params) => (
                 <Input
                   {...params}
                   customLabel="Ключевые навыки"
                   type={"text"}
-                  placeholder={"Например, Material Design 3"}
+                  placeholder={
+                    selectedSkills.length === 0
+                      ? "Например, Material Design 3"
+                      : ""
+                  }
                   register={register}
                   registerName={"skills"}
                   error={!!errors.skills}
@@ -132,33 +152,18 @@ function VacancyForm({ tab }: VacancyFormProps) {
               </FormLabel>
               <RadioGroup
                 aria-labelledby="skills-radio-buttons-group-label"
-                defaultValue="0"
+                defaultValue={experienceOpt[0]?.id || 1}
                 name="radio-buttons-group"
               >
-                <FormControlLabel
-                  {...register("experience")}
-                  value="0"
-                  control={<Radio />}
-                  label="Нет опыта"
-                />
-                <FormControlLabel
-                  {...register("experience")}
-                  value="1"
-                  control={<Radio />}
-                  label="от 1 года до 3 лет"
-                />
-                <FormControlLabel
-                  {...register("experience")}
-                  value="2"
-                  control={<Radio />}
-                  label="от 3 года до 6 лет"
-                />
-                <FormControlLabel
-                  {...register("experience")}
-                  value="3"
-                  control={<Radio />}
-                  label="более 6 лет"
-                />
+                {experienceOpt.map((option) => (
+                  <FormControlLabel
+                    key={option.id}
+                    {...register("experience")}
+                    value={option.id}
+                    control={<Radio />}
+                    label={option.name}
+                  />
+                ))}
               </RadioGroup>
             </FormControl>
           </Grid>
@@ -235,13 +240,15 @@ function VacancyForm({ tab }: VacancyFormProps) {
                   {...register("currency")}
                   labelId="currency_select_id_label"
                   id="currency"
-                  defaultValue={0}
+                  defaultValue={currencyOpt[3]?.id || 4}
                   label="Валюта"
                   fullWidth
                 >
-                  <MenuItem value={0}>Рубли</MenuItem>
-                  <MenuItem value={1}>Доллары</MenuItem>
-                  <MenuItem value={2}>Евро</MenuItem>
+                  {currencyOpt.map((option) => (
+                    <MenuItem value={option.id} key={option.id}>
+                      {option.name}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
@@ -251,13 +258,13 @@ function VacancyForm({ tab }: VacancyFormProps) {
               options={cityOpt}
               getOptionLabel={(cityOpt) => cityOpt.name}
               onChange={handleCityChange}
+              value={selectedCity}
               noOptionsText={"Нет подходящих вариантов"}
               renderInput={(params) => (
                 <Input
                   {...params}
                   customLabel="В каком городе опубликовать вакансию"
                   type={"text"}
-                  value={selectedCity?.name}
                   placeholder={"Укажите города для размещения"}
                   register={register}
                   registerName={"city"}
@@ -288,7 +295,7 @@ function VacancyForm({ tab }: VacancyFormProps) {
               customLabel="Требования"
               type={"text"}
               register={register}
-              registerName={"requirement"}
+              registerName={"requirements"}
               error={!!errors.requirement}
               helperText={errors.requirement?.message}
             />
@@ -321,39 +328,18 @@ function VacancyForm({ tab }: VacancyFormProps) {
             </FormLabel>
             <RadioGroup
               aria-labelledby="workload-radio-buttons-group-label"
-              defaultValue="Полная занятость"
+              defaultValue={empolymentsOpt[0]?.id | 1}
               name="radio-buttons-group"
             >
-              <FormControlLabel
-                {...register("workload")}
-                value="fullTime"
-                control={<Radio />}
-                label="Полная занятость"
-              />
-              <FormControlLabel
-                {...register("workload")}
-                value="partTime"
-                control={<Radio />}
-                label="Частичная занятость"
-              />
-              <FormControlLabel
-                {...register("workload")}
-                value="project"
-                control={<Radio />}
-                label="Проектная работа"
-              />
-              <FormControlLabel
-                {...register("workload")}
-                value="intenship"
-                control={<Radio />}
-                label="Стажировка"
-              />
-              <FormControlLabel
-                {...register("workload")}
-                value="volunteer"
-                control={<Radio />}
-                label="Волонтерство"
-              />
+              {empolymentsOpt.map((option) => (
+                <FormControlLabel
+                  {...register("employments")}
+                  key={option.id}
+                  value={option.id}
+                  control={<Radio />}
+                  label={option.name}
+                />
+              ))}
             </RadioGroup>
           </FormControl>
         </Grid>
@@ -364,45 +350,18 @@ function VacancyForm({ tab }: VacancyFormProps) {
             </FormLabel>
             <RadioGroup
               aria-labelledby="workHours-radio-buttons-group-label"
-              defaultValue="Полная занятость"
+              defaultValue={schedulesOpt[0]?.id | 1}
               name="radio-buttons-group"
             >
-              <FormControlLabel
-                {...register("workHours")}
-                value="52"
-                control={<Radio />}
-                label="5/2"
-              />
-              <FormControlLabel
-                {...register("workHours")}
-                value="61"
-                control={<Radio />}
-                label="6/1"
-              />
-              <FormControlLabel
-                {...register("workHours")}
-                value="gibki"
-                control={<Radio />}
-                label="Гибкий график"
-              />
-              <FormControlLabel
-                {...register("workHours")}
-                value="smeni"
-                control={<Radio />}
-                label="Сменный график"
-              />
-              <FormControlLabel
-                {...register("workHours")}
-                value="remote"
-                control={<Radio />}
-                label="Удаленкао"
-              />
-              <FormControlLabel
-                {...register("workHours")}
-                value="vahta"
-                control={<Radio />}
-                label="Вахтовый метод"
-              />
+              {schedulesOpt.map((option) => (
+                <FormControlLabel
+                  {...register("schedule")}
+                  key={option.id}
+                  value={option.id}
+                  control={<Radio />}
+                  label={option.name}
+                />
+              ))}
             </RadioGroup>
           </FormControl>
         </Grid>
@@ -444,9 +403,13 @@ function VacancyForm({ tab }: VacancyFormProps) {
   return (
     <form
       noValidate
-      onSubmit={handleSubmit((evt) => {
-        // evt.city = selectedCity?.id
-        dispatch(createVacancy(evt))
+      onSubmit={handleSubmit((data) => {
+        data.city = selectedCity?.id
+        data.skills = selectedSkills.map((skill) => skill.id)
+        data.employments = Number(data.employments)
+        data.experience = Number(data.experience)
+        data.schedule = Number(data.schedule)
+        dispatch(createVacancy(data))
       })}
     >
       {tab ? <Aditionalields /> : <MainFields />}
