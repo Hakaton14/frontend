@@ -5,13 +5,11 @@ import AppBar from "@mui/material/AppBar"
 import Box from "@mui/material/Box"
 import Toolbar from "@mui/material/Toolbar"
 import IconButton from "@mui/material/IconButton"
-import Typography from "@mui/material/Typography"
 import InputBase from "@mui/material/InputBase"
-
 import SearchIcon from "../../ui-kit/icons/search.svg"
-import NotificationIcon from "../../ui-kit/icons/notification.png"
-import UserIcon from "../../ui-kit/icons/user.png"
-import GroupIcon from "../../ui-kit/icons/Group.png"
+import NotificationIcon from "../../ui-kit/icons/bell.svg"
+import UserIcon from "../../ui-kit/icons/user.svg"
+import GroupIcon from "../../ui-kit/icons/letter.svg"
 import Logo from "../../ui-kit/icons/career-logo-1b10b20f 1.svg"
 
 const Search = styled("div")(({ theme }) => ({
@@ -56,12 +54,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function Header() {
   return (
-    <Box sx={{ flexGrow: 1, maxWidth: "1440px" }}>
-      <AppBar position="static" style={{ backgroundColor: "#1A1B22" }}>
+    <Box sx={{ flexGrow: 1, Width: "100%" }}>
+      <AppBar position="static" sx={{ backgroundColor: "#1A1B22" }}>
         <Toolbar>
           <img
             src={Logo}
-            alt="Логотипs"
+            alt="Логотип"
             style={{ margin: "10px 148px 10px 83px" }}
           />
           <Search>
@@ -70,7 +68,7 @@ function Header() {
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Поиск по названию вакансии"
-              style={{
+              sx={{
                 width: "507px",
                 height: "40px",
                 // backgroundColor: "#FFF",
@@ -79,11 +77,11 @@ function Header() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton style={{ padding: "0", marginRight: "52px" }}>
+            <IconButton sx={{ padding: "0", marginRight: "52px" }}>
               <img src={UserIcon} alt="Иконка пользователя" />
             </IconButton>
             <IconButton
-              style={{
+              sx={{
                 padding: "0",
                 marginRight: "52px",
                 width: "24px",
@@ -92,7 +90,7 @@ function Header() {
             >
               <img src={GroupIcon} alt="Иконка писем" />
             </IconButton>
-            <IconButton style={{ padding: "0", width: "24px", height: "24px" }}>
+            <IconButton sx={{ padding: "0", width: "24px", height: "24px" }}>
               <img src={NotificationIcon} alt="Иконка уведомлений" />
             </IconButton>
           </Box>
