@@ -1,0 +1,49 @@
+.tableWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.progressWrapper {
+  margin-right: 60px;
+}
+
+.professionWrapper {
+  margin-right: 100px;
+}
+
+.buttonWrapper {
+  // margin-right: 60px;
+}
+
+.vacantionTitle {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  color: #1a1b22;
+  margin: 0;
+  padding-bottom: 8px;
+}
+
+.progressTitle {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  color: #b5b5b7;
+  margin: 0;
+}
+
+.progress {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  color: #b5b5b7;
+  margin: 0;
+  padding-bottom: 12px;
+}
+
+.icon {
+  padding-right: 4px;
+}
