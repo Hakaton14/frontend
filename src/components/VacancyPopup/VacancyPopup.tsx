@@ -12,18 +12,14 @@ import {
 import { useState, SyntheticEvent } from "react"
 
 type VacancyPopupProps = {
-  openPopup: boolean
+  isOpen: boolean
+  togglePopup: () => void
 }
-function VacancyPopup({ openPopup }: VacancyPopupProps) {
-  const [isOpen, setIsOpen] = useState(openPopup)
+function VacancyPopup({ togglePopup, isOpen }: VacancyPopupProps) {
   const [value, setValue] = useState(0)
   //Изменение вкладки
   const switchTab = (evt: SyntheticEvent, newVal: number) => {
     setValue(newVal)
-  }
-  //Закрытие попапа
-  const handleClose = () => {
-    setIsOpen(false)
   }
 
   function a11yProps(index: number) {
@@ -55,7 +51,7 @@ function VacancyPopup({ openPopup }: VacancyPopupProps) {
       </DialogTitle>
       <IconButton
         aria-label="close"
-        onClick={handleClose}
+        onClick={togglePopup}
         sx={{
           position: "absolute",
           right: 8,

@@ -12,7 +12,7 @@ interface IinitialState {
   cityOpt: TOpts[]
   skillsOpt: TOpts[]
   experienceOpt: TOpts[]
-  empolymentsOpt: TOpts[]
+  employmentsOpt: TOpts[]
   currencyOpt: TOpts[]
   schedulesOpt: TOpts[]
 }
@@ -20,7 +20,7 @@ interface IinitialState {
 const initialState: IinitialState = {
   cityOpt: [],
   skillsOpt: [],
-  empolymentsOpt: [],
+  employmentsOpt: [],
   experienceOpt: [],
   currencyOpt: [],
   schedulesOpt: [],
@@ -73,7 +73,7 @@ const filtersSlice = createSlice({
 
       .addCase(getEmployments.pending, (state) => {})
       .addCase(getEmployments.fulfilled, (state, action) => {
-        state.empolymentsOpt = action.payload
+        state.employmentsOpt = action.payload
       })
       .addCase(getEmployments.rejected, (state) => {})
 

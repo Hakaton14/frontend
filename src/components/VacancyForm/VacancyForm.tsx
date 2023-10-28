@@ -44,6 +44,12 @@ function VacancyForm({ tab }: VacancyFormProps) {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(vacancyShema),
+    defaultValues: {
+      employment: "2",
+      experience: "1",
+      currency: "4",
+      schedule: "1"
+    }
   })
   // const [options, setOptions] = useState<string[]>([])
   // const [currencyOpts, setCurrencyOpts] = useState<object[]>([])
@@ -55,7 +61,7 @@ function VacancyForm({ tab }: VacancyFormProps) {
     currencyOpt,
     schedulesOpt,
     experienceOpt,
-    empolymentsOpt,
+    employmentsOpt,
   } = useAppSelector((state) => state.filters)
 
   // const onChangehandle = async (value: any) => {
@@ -86,12 +92,12 @@ function VacancyForm({ tab }: VacancyFormProps) {
   // const onSubmit = (evt: SyntheticEvent) => {
   //   evt.city = console.log(evt)
   // }
-  // useEffect(() => {
-  //   const subscription = watch((value, { name, type }) => {
-  //     console.log(value, name, type)
-  //   })
-  //   return () => subscription.unsubscribe()
-  // }, [watch])
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) => {
+      console.log(value, name, type)
+    })
+    return () => subscription.unsubscribe()
+  }, [watch])
 
   useEffect(() => {
     dispatch(getCurrency())
@@ -122,7 +128,7 @@ function VacancyForm({ tab }: VacancyFormProps) {
               multiple
               options={skillsOpt}
               getOptionLabel={(skillsOpt) => skillsOpt.name}
-              // isOptionEqualToValue={(option, value) => option.id === value.id}
+              isOptionEqualToValue={(option, value) => option.id === value.id}
               onChange={handleSkillsChange}
               value={selectedSkills}
               filterSelectedOptions
@@ -152,7 +158,7 @@ function VacancyForm({ tab }: VacancyFormProps) {
               </FormLabel>
               <RadioGroup
                 aria-labelledby="skills-radio-buttons-group-label"
-                defaultValue={experienceOpt[0]?.id || 1}
+                defaultValue={experienceOpt[0]?.id || "1"}
                 name="radio-buttons-group"
               >
                 {experienceOpt.map((option) => (
@@ -209,6 +215,7 @@ function VacancyForm({ tab }: VacancyFormProps) {
                 customLabel="Зарплата"
                 type={"number"}
                 placeholder={"От"}
+                defaultValue={0}
                 register={register}
                 registerName={"salary_from"}
                 registerOptions={{ valueAsNumber: true }}
@@ -221,6 +228,7 @@ function VacancyForm({ tab }: VacancyFormProps) {
                 customLabel="."
                 type={"number"}
                 placeholder={"До"}
+                defaultValue={0}
                 register={register}
                 registerOptions={{ valueAsNumber: true }}
                 registerName={"salary_to"}
@@ -240,7 +248,7 @@ function VacancyForm({ tab }: VacancyFormProps) {
                   {...register("currency")}
                   labelId="currency_select_id_label"
                   id="currency"
-                  defaultValue={currencyOpt[3]?.id || 4}
+                  defaultValue={currencyOpt[3]?.id || "4"}
                   label="Валюта"
                   fullWidth
                 >
@@ -259,6 +267,7 @@ function VacancyForm({ tab }: VacancyFormProps) {
               getOptionLabel={(cityOpt) => cityOpt.name}
               onChange={handleCityChange}
               value={selectedCity}
+              isOptionEqualToValue={(option, value) => option.id === value.id}
               noOptionsText={"Нет подходящих вариантов"}
               renderInput={(params) => (
                 <Input
@@ -296,8 +305,8 @@ function VacancyForm({ tab }: VacancyFormProps) {
               type={"text"}
               register={register}
               registerName={"requirements"}
-              error={!!errors.requirement}
-              helperText={errors.requirement?.message}
+              error={!!errors.requirements}
+              helperText={errors.requirements?.message}
             />
           </Grid>
           <Grid item xs={12}>
@@ -328,12 +337,12 @@ function VacancyForm({ tab }: VacancyFormProps) {
             </FormLabel>
             <RadioGroup
               aria-labelledby="workload-radio-buttons-group-label"
-              defaultValue={empolymentsOpt[0]?.id | 1}
-              name="radio-buttons-group"
+              defaultValue={"1"}
+              name="radio-buttons-group1"
             >
-              {empolymentsOpt.map((option) => (
+              {employmentsOpt.map((option) => (
                 <FormControlLabel
-                  {...register("employments")}
+                  {...register("employment")}
                   key={option.id}
                   value={option.id}
                   control={<Radio />}
@@ -350,8 +359,8 @@ function VacancyForm({ tab }: VacancyFormProps) {
             </FormLabel>
             <RadioGroup
               aria-labelledby="workHours-radio-buttons-group-label"
-              defaultValue={schedulesOpt[0]?.id | 1}
-              name="radio-buttons-group"
+              defaultValue={schedulesOpt[0]?.id || "1"}
+              name="radio-buttons-group2"
             >
               {schedulesOpt.map((option) => (
                 <FormControlLabel
@@ -406,9 +415,10 @@ function VacancyForm({ tab }: VacancyFormProps) {
       onSubmit={handleSubmit((data) => {
         data.city = selectedCity?.id
         data.skills = selectedSkills.map((skill) => skill.id)
-        data.employments = Number(data.employments)
+        data.employment = Number(data.employment)
         data.experience = Number(data.experience)
         data.schedule = Number(data.schedule)
+        data.currency = Number(data.currency)
         dispatch(createVacancy(data))
       })}
     >

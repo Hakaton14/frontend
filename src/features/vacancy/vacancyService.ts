@@ -20,9 +20,28 @@ interface IVacancyData {
 }
 //TODO Вынести в .env
 const API_URL = "http://127.0.0.1:8000/api/v1"
+const json = localStorage.getItem("user")
+const user = json && JSON.parse(json)
 
 const createVacancy = async (vacancyData: IVacancyData) => {
-  const response = await axios.post(`${API_URL}/vacancies/`, vacancyData)
+  const newData = {
+    ...vacancyData,
+    testcase: "ddd",
+    description: "2112",
+    // skills: [5],
+    languages: [
+      {
+        language: 1,
+        level: 1,
+      },
+    ],
+  }
+  const response = await axios.post(`${API_URL}/vacancies/`, newData, {
+    headers: {
+      "content-type": "application/x-www-form-urlencoded;charset=windows-1251",
+      Authorization: `Bearer ${user.access}`,
+    },
+  })
 
   return response.data
 }

@@ -81,10 +81,10 @@ export const vacancyShema = yup.object().shape({
   salary_to: yup.string(),
   currency: yup.string(),
   responsibilities: yup.string().required("Заполните поле"),
-  requirement: yup.string().required("Заполните поле"),
+  requirements: yup.string().required("Заполните поле"),
   conditions: yup.string().required("Заполните поле"),
   lang: yup.string(),
   langGrade: yup.string(),
-  employments: yup.string(),
+  employment: yup.string(),
   schedule: yup.string(),
 })
