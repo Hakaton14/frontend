@@ -11,6 +11,7 @@ import NotificationIcon from "../../ui-kit/icons/bell.svg"
 import UserIcon from "../../ui-kit/icons/user.svg"
 import GroupIcon from "../../ui-kit/icons/letter.svg"
 import Logo from "../../ui-kit/icons/career-logo-1b10b20f 1.svg"
+import { ArrowRightIcon } from "@mui/x-date-pickers"
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -29,7 +30,7 @@ const Search = styled("div")(({ theme }) => ({
 }))
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
+  // padding: theme.spacing(0, 2),
   height: "100%",
   position: "absolute",
   pointerEvents: "none",
@@ -46,9 +47,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
+    // [theme.breakpoints.up("md")]: {
+    //   width: "20ch",
+    // },
   },
 }))
 
@@ -66,6 +67,7 @@ function Header() {
             <SearchIconWrapper>
               <img src={SearchIcon} alt="Иконка поиска" />
             </SearchIconWrapper>
+            {/* Сам инпут */}
             <StyledInputBase
               placeholder="Поиск по названию вакансии"
               sx={{
@@ -74,6 +76,7 @@ function Header() {
                 // backgroundColor: "#FFF",
               }}
             />
+            <ArrowRightIcon sx={{pt:1}}/>
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
