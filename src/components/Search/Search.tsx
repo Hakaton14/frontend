@@ -2,6 +2,7 @@ import { Button } from "@mui/material"
 import styles from "./Serach.module.scss"
 import ArrowIcon from "../../ui-kit/icons/Long arrow.svg"
 import Filtercon from "../../ui-kit/icons/filter_icon.svg"
+import СandidateСard from "../СandidateСard/СandidateСard"
 
 function Search() {
   return (
@@ -35,6 +36,7 @@ function Search() {
         </Button>
         <h3 className={styles.filterTitle}>По дате публикации</h3>
       </div>
+      <СandidateСard />
     </div>
   )
 }
