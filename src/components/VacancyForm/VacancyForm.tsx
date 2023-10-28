@@ -24,7 +24,7 @@ type VacancyFormProps = {
   tab: number
 }
 
-type TSelectedCity = {
+type TSelectedOpt = {
   id: number
   name: string
 }
@@ -48,17 +48,30 @@ function VacancyForm({ tab }: VacancyFormProps) {
   //   dispatch(getCity())
   // }
 
-  const [selectedCity, setSelectedCity] = useState<TSelectedCity | null>(null)
-  const handleChange = (
+  const [selectedCity, setSelectedCity] = useState<TSelectedOpt | null>(null)
+  const [selectedSkills, setSelectedSkills] = useState<TSelectedOpt[] | null>(
+    null,
+  )
+
+  const handleCityChange = (
     evt: SyntheticEvent,
-    selectedCity: TSelectedCity | null,
+    selectedCity: TSelectedOpt | null,
   ) => {
     if (selectedCity) {
       setSelectedCity(selectedCity)
     } else {
       setSelectedCity(null)
     }
-
+  }
+  const handleSkillsChange = (
+    evt: SyntheticEvent,
+    selectedSkill: TSelectedOpt | null,
+  ) => {
+    if (selectedSkill) {
+      setSelectedSkills((prev) => console.log(selectedSkill) )
+    } else {
+      setSelectedSkills(null)
+    }
   }
 
   // const onSubmit = (evt: SyntheticEvent) => {
@@ -76,12 +89,6 @@ function VacancyForm({ tab }: VacancyFormProps) {
     dispatch(getCity())
   }, [])
 
-  // useEffect(() => {
-  //   const currencyList = dispatch(getCurrency())
-  //   setCurrencyOpts(currencyList)
-  //   return () => {}
-  // }, [])
-
   const MainFields = () => (
     <Fragment>
       <Grid container spacing={4} justifyContent={"center"}>
@@ -98,14 +105,24 @@ function VacancyForm({ tab }: VacancyFormProps) {
             />
           </Grid>
           <Grid item xs={12} pb={1}>
-            <Input
-              customLabel="Ключевые навыки"
-              type={"text"}
-              placeholder={"Например, Material Design 3"}
-              register={register}
-              registerName={"skills"}
-              error={!!errors.skills}
-              helperText={errors.skills?.message}
+            <Autocomplete
+              multiple
+              options={cityOpt}
+              getOptionLabel={(cityOpt) => cityOpt.name}
+              onChange={handleSkillsChange}
+              noOptionsText={"Нет подходящих вариантов"}
+              renderInput={(params) => (
+                <Input
+                  {...params}
+                  customLabel="Ключевые навыки"
+                  type={"text"}
+                  placeholder={"Например, Material Design 3"}
+                  register={register}
+                  registerName={"skills"}
+                  error={!!errors.skills}
+                  helperText={errors.skills?.message}
+                />
+              )}
             />
           </Grid>
           <Grid item xs={12} pb={1}>
@@ -233,7 +250,7 @@ function VacancyForm({ tab }: VacancyFormProps) {
             <Autocomplete
               options={cityOpt}
               getOptionLabel={(cityOpt) => cityOpt.name}
-              onChange={handleChange}
+              onChange={handleCityChange}
               noOptionsText={"Нет подходящих вариантов"}
               renderInput={(params) => (
                 <Input
@@ -428,7 +445,7 @@ function VacancyForm({ tab }: VacancyFormProps) {
     <form
       noValidate
       onSubmit={handleSubmit((evt) => {
-        evt.city = selectedCity?.id
+        // evt.city = selectedCity?.id
         dispatch(createVacancy(evt))
       })}
     >
