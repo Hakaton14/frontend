@@ -1,5 +1,27 @@
 .mainContainer {
   display: flex;
+  border-radius: 16px;
+  border: 1px solid var(--black-100, #dde0e4);
+  display: flex;
+  width: 816px;
+  height: 122px;
+  padding-left: 0px;
+  align-items: center;
+  gap: 42px;
+}
+
+.fotoIcon {
+  margin-left: 40px;
+  max-width: 100px;
+  max-height: 100px;
+  align-self: center;
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
 }
 
 .candidateName {
@@ -29,4 +51,18 @@
   line-height: 20px;
   color: #1a1b22;
   margin: 0;
+}
+
+.skillsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconsWrapper {
+  display: flex;
+  height: 102px;
+  align-items: flex-start;
+  gap: 20px;
 }
