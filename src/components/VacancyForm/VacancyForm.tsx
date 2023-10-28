@@ -15,13 +15,20 @@ import {
   Button,
   Autocomplete,
 } from "@mui/material"
-import { Fragment, useEffect, useState } from "react"
+import { Fragment, SyntheticEvent, useEffect, useState } from "react"
 import { getCity, getCurrency } from "@Features"
 import { useAppDispatch, useAppSelector } from "@ReduxHooks"
+import { createVacancy } from "@Features"
 
 type VacancyFormProps = {
   tab: number
 }
+
+type TSelectedCity = {
+  id: number
+  name: string
+}
+
 function VacancyForm({ tab }: VacancyFormProps) {
   const {
     register,
@@ -41,12 +48,28 @@ function VacancyForm({ tab }: VacancyFormProps) {
   //   dispatch(getCity())
   // }
 
-  useEffect(() => {
-    const subscription = watch((value, { name, type }) => {
-      console.log(value, name, type)
-    })
-    return () => subscription.unsubscribe()
-  }, [watch])
+  const [selectedCity, setSelectedCity] = useState<TSelectedCity | null>(null)
+  const handleChange = (
+    evt: SyntheticEvent,
+    selectedCity: TSelectedCity | null,
+  ) => {
+    if (selectedCity) {
+      setSelectedCity(selectedCity)
+    } else {
+      setSelectedCity(null)
+    }
+
+  }
+
+  // const onSubmit = (evt: SyntheticEvent) => {
+  //   evt.city = console.log(evt)
+  // }
+  // useEffect(() => {
+  //   const subscription = watch((value, { name, type }) => {
+  //     console.log(value, name, type)
+  //   })
+  //   return () => subscription.unsubscribe()
+  // }, [watch])
 
   useEffect(() => {
     dispatch(getCurrency())
@@ -199,7 +222,6 @@ function VacancyForm({ tab }: VacancyFormProps) {
                   label="Валюта"
                   fullWidth
                 >
-                  {}
                   <MenuItem value={0}>Рубли</MenuItem>
                   <MenuItem value={1}>Доллары</MenuItem>
                   <MenuItem value={2}>Евро</MenuItem>
@@ -211,11 +233,14 @@ function VacancyForm({ tab }: VacancyFormProps) {
             <Autocomplete
               options={cityOpt}
               getOptionLabel={(cityOpt) => cityOpt.name}
+              onChange={handleChange}
+              noOptionsText={"Нет подходящих вариантов"}
               renderInput={(params) => (
                 <Input
                   {...params}
                   customLabel="В каком городе опубликовать вакансию"
                   type={"text"}
+                  value={selectedCity?.name}
                   placeholder={"Укажите города для размещения"}
                   register={register}
                   registerName={"city"}
@@ -224,15 +249,6 @@ function VacancyForm({ tab }: VacancyFormProps) {
                 />
               )}
             />
-            {/* <Input
-              customLabel="В каком городе опубликовать вакансию"
-              type={"text"}
-              placeholder={"Укажите города для размещения"}
-              register={register}
-              registerName={"city"}
-              error={!!errors.city}
-              helperText={errors.city?.message}
-            /> */}
           </Grid>
           <Grid item xs={12} pb={1}>
             <Input
@@ -254,7 +270,6 @@ function VacancyForm({ tab }: VacancyFormProps) {
               rows={2}
               customLabel="Требования"
               type={"text"}
-              // placeholder={"Введите основные требования вакансии"}
               register={register}
               registerName={"requirement"}
               error={!!errors.requirement}
@@ -268,7 +283,6 @@ function VacancyForm({ tab }: VacancyFormProps) {
               rows={2}
               customLabel="Условия"
               type={"text"}
-              // placeholder={"Например, Material Design 3"}
               register={register}
               registerName={"conditions"}
               error={!!errors.conditions}
@@ -411,7 +425,13 @@ function VacancyForm({ tab }: VacancyFormProps) {
   )
 
   return (
-    <form noValidate onSubmit={handleSubmit(() => console.log("first"))}>
+    <form
+      noValidate
+      onSubmit={handleSubmit((evt) => {
+        evt.city = selectedCity?.id
+        dispatch(createVacancy(evt))
+      })}
+    >
       {tab ? <Aditionalields /> : <MainFields />}
 
       <Grid container justifyContent={"center"} mt={4}>

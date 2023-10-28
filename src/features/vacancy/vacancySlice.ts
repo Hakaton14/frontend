@@ -21,13 +21,14 @@ const initialState: IinitialState = {
 export const createVacancy = createAsyncThunk(
   "vacancy/create",
   async (vacancyData: any, thunkAPI) => {
+    console.log(vacancyData)
     try {
       return vacancyService.createVacancy(vacancyData)
     } catch (error) {}
   },
 )
-export const updateVacancy = createAsyncThunk()
-export const deleteVacancy = createAsyncThunk()
+// export const updateVacancy = createAsyncThunk()
+// export const deleteVacancy = createAsyncThunk()
 
 const vacanciesSlice = createSlice({
   name: "vanacies",
@@ -42,3 +43,5 @@ const vacanciesSlice = createSlice({
       .addCase(createVacancy.rejected, (state) => {})
   },
 })
+
+export default vacanciesSlice.reducer
