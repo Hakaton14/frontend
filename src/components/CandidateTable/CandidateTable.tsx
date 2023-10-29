@@ -13,8 +13,12 @@ import PencilIcon from "../../ui-kit/icons/pencil-1.svg"
 import FolderIcon from "../../ui-kit/icons/folder.svg"
 import EyeIcon from "../../ui-kit/icons/eye.svg"
 import { useAppSelector } from "@ReduxHooks"
-
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+import "dayjs/locale/ru"
 function CandidateTable() {
+  dayjs.extend(relativeTime)
+
   const vacancies = useAppSelector((state) => state.vacancies.vacancyList)
   return (
     <div>
@@ -39,7 +43,9 @@ function CandidateTable() {
             <div className={styles.tableWrapper}>
               <div className={styles.professionWrapper}>
                 <h2 className={styles.vacantionTitle}>{vacancy.name}</h2>
-                <h3 className={styles.progressTitle}>В работе: 34 дня</h3>
+                <h3 className={styles.progressTitle}>
+                  {dayjs(vacancy.pub_datetime).locale("ru").fromNow()}
+                </h3>
               </div>
 
               <div className={styles.progressWrapper}>
