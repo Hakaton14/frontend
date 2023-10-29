@@ -21,7 +21,9 @@ const CandidateResume = () => {
         <ButtonPanel />
         <div className={styles.Bio}></div>
       </div>
-      <div className={styles.ContainerBottom}></div>
+      <div className={styles.ContainerBottom}>
+        
+      </div>
     </section>
   )
 }
