@@ -63,4 +63,31 @@
     }
 }
 
-.ContainerBottom {}
+.ContainerBottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 82px;
+
+    & .ContainerInfo {
+        margin: 0 0 48px 0;
+
+        &:last-child {
+            margin: 0;
+        }
+
+        & .ChipContainer {
+            display: flex;
+            gap: 8px 12px;
+            flex-wrap: wrap;
+        }
+    }
+
+    & .Left {
+        width: 42%;
+    }
+    & .Right {
+        width: 48%;
+    }
+
+}
