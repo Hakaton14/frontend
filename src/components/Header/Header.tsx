@@ -1,24 +1,23 @@
-import * as React from "react"
 import { styled, alpha } from "@mui/material/styles"
-// import { makeStyles } from "@material-ui/core/styles"
 import AppBar from "@mui/material/AppBar"
 import Box from "@mui/material/Box"
 import Toolbar from "@mui/material/Toolbar"
 import IconButton from "@mui/material/IconButton"
-import InputBase from "@mui/material/InputBase"
+// import InputBase from "@mui/material/InputBase"
 import SearchIcon from "../../ui-kit/icons/search.svg"
 import NotificationIcon from "../../ui-kit/icons/bell.svg"
 import UserIcon from "../../ui-kit/icons/user.svg"
 import GroupIcon from "../../ui-kit/icons/letter.svg"
 import Logo from "../../ui-kit/icons/career-logo-1b10b20f 1.svg"
+import { Button } from "@mui/material"
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
+  // "&:hover": {
+  //   backgroundColor: alpha(theme.palette.common.white, 0.25),
+  // },
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "100%",
@@ -28,29 +27,29 @@ const Search = styled("div")(({ theme }) => ({
   },
 }))
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}))
+// const SearchIconWrapper = styled("div")(({ theme }) => ({
+//   padding: theme.spacing(0, 2),
+//   height: "100%",
+//   position: "absolute",
+//   pointerEvents: "none",
+//   display: "flex",
+//   alignItems: "center",
+//   justifyContent: "center",
+// }))
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}))
+// const StyledInputBase = styled(InputBase)(({ theme }) => ({
+//   color: "inherit",
+//   "& .MuiInputBase-input": {
+//     padding: theme.spacing(1, 1, 1, 0),
+//     // vertical padding + font size from searchIcon
+//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+//     transition: theme.transitions.create("width"),
+//     width: "100%",
+//     [theme.breakpoints.up("md")]: {
+//       width: "20ch",
+//     },
+//   },
+// }))
 
 function Header() {
   return (
@@ -62,8 +61,30 @@ function Header() {
             alt="Логотип"
             style={{ margin: "10px 148px 10px 83px" }}
           />
-          <Search>
-            <SearchIconWrapper>
+          <Search
+            sx={{
+              background: "#FFF",
+              margin: "0",
+              alignItems: "left",
+            }}
+          >
+            <Button
+              sx={{
+                padding: "0",
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: "400",
+                lineHeight: "20px",
+                color: "#797981",
+                width: "507px",
+                height: "40px",
+                textTransform: "none",
+              }}
+            >
+              <img src={SearchIcon} alt="Иконка поиска" />
+              Поиск по названию вакансии
+            </Button>
+            {/* <SearchIconWrapper>
               <img src={SearchIcon} alt="Иконка поиска" />
             </SearchIconWrapper>
             <StyledInputBase
@@ -73,7 +94,7 @@ function Header() {
                 height: "40px",
                 // backgroundColor: "#FFF",
               }}
-            />
+            /> */}
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
