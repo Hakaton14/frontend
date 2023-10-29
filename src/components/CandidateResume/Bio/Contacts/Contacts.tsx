@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material"
 import { Email, FaceBook, LikeFilled, Phone, Telegram, VK } from "@IconResume"
+import { Resume } from "../../MokeData"
 import styles from ".././../CandidateResume.module.scss"
 
 const styleSx = {
