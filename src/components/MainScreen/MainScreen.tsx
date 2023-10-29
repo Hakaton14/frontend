@@ -5,17 +5,10 @@ import Calendar from "../Calendar/Calendar"
 import CandidateTable from "../CandidateTable/CandidateTable"
 import { Button } from "@mui/material"
 import AddIcon from "../../ui-kit/icons/add.svg"
-import { VacancyPopup } from "@Components"
-import {
-  getCity,
-  getCurrency,
-  getEmployments,
-  getExperiences,
-  getSchedules,
-  getSkills,
-  getVacancies,
-} from "@Features"
+import { CurrentDate, VacancyPopup } from "@Components"
+
 import { useAppDispatch, useAppSelector } from "@ReduxHooks"
+import { Stack } from "@mui/material"
 
 const MainScreen: FC = () => {
   const [openPopup, setOpenPopup] = useState(false)
@@ -25,16 +18,6 @@ const MainScreen: FC = () => {
   const handleClick = () => {
     setOpenPopup(!openPopup)
   }
-
-  useEffect(() => {
-    dispatch(getCurrency())
-    dispatch(getCity())
-    dispatch(getSkills())
-    dispatch(getSchedules())
-    dispatch(getEmployments())
-    dispatch(getExperiences())
-    dispatch(getVacancies())
-  }, [])
 
   return (
     <>
@@ -120,7 +103,11 @@ const MainScreen: FC = () => {
           </div>
           <CandidateTable />
         </div>
-        <Calendar />
+
+        <Stack>
+          <CurrentDate />
+          <Calendar />
+        </Stack>
       </div>
     </>
   )

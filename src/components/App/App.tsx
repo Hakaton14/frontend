@@ -3,8 +3,29 @@ import { Auth } from "@Components"
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"
 import MainScreen from "../MainScreen/MainScreen"
 import Search from "../Search/Search"
-//123AAa!!
+import { useEffect } from "react"
+import { useAppDispatch } from "@ReduxHooks"
+import {
+  getCity,
+  getCurrency,
+  getEmployments,
+  getExperiences,
+  getSchedules,
+  getSkills,
+  getVacancies,
+} from "@Features"
 function App() {
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(getCurrency())
+    dispatch(getCity())
+    dispatch(getSkills())
+    dispatch(getSchedules())
+    dispatch(getEmployments())
+    dispatch(getExperiences())
+    dispatch(getVacancies())
+  }, [])
+
   return (
     <div className="App">
       <Routes>

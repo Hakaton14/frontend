@@ -4,7 +4,7 @@ import AccordionSummary from "@mui/material/AccordionSummary"
 import AccordionDetails from "@mui/material/AccordionDetails"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import LinearProgress from "@mui/material/LinearProgress"
-import { Button } from "@mui/material"
+import { Button, Stack } from "@mui/material"
 
 import CandidatInfoTable from "../CandidatInfoTable/CandidatInfoTable"
 
@@ -20,7 +20,7 @@ function CandidateTable() {
 
   const vacancies = useAppSelector((state) => state.vacancies.vacancyList)
   return (
-    <div>
+    <Stack spacing={1}>
       {vacancies.map((vacancy) => (
         <Accordion sx={{ width: "945px" }} key={vacancy.id}>
           <AccordionSummary
@@ -119,7 +119,7 @@ function CandidateTable() {
           </AccordionDetails>
         </Accordion>
       ))}
-    </div>
+    </Stack>
   )
 }
 

@@ -1,12 +1,15 @@
 .mainContainer {
   display: flex;
+  min-width: 945px;
   align-items: space-between;
   margin: 60px 83px 0 83px;
 }
 
 .container {
   display: flex;
+  width: 100%;
   flex-direction: column;
+
 }
 
 .title {
