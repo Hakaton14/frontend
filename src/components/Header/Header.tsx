@@ -9,73 +9,36 @@ import UserIcon from "../../ui-kit/icons/user.svg"
 import GroupIcon from "../../ui-kit/icons/letter.svg"
 import Logo from "../../ui-kit/icons/career-logo-1b10b20f 1.svg"
 import { Button } from "@mui/material"
-import { useNavigate } from "react-router-dom"
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  // "&:hover": {
-  //   backgroundColor: alpha(theme.palette.common.white, 0.25),
-  // },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}))
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  // padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}))
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    // [theme.breakpoints.up("md")]: {
-    //   width: "20ch",
-    // },
-  },
-}))
+import { useLocation, useNavigate } from "react-router-dom"
+import styles from "./Header.module.scss"
 
 function Header() {
   const navigate = useNavigate()
-
+  const { pathname } = useLocation()
   return (
     <Box sx={{ flexGrow: 1, Width: "100%" }}>
       <AppBar position="static" sx={{ backgroundColor: "#1A1B22" }}>
         <Toolbar>
           <img
+            onClick={() => navigate("/")}
             src={Logo}
             alt="Логотип"
-            style={{ margin: "10px 148px 10px 83px" }}
+            className={styles.img}
+            style={{
+              margin: "10px 148px 10px 83px",
+            }}
           />
-          <Search onClick={() => navigate("/search")}>
-            <SearchIconWrapper>
+          {pathname !== "/search" && (
+            <Button
+              onClick={() => navigate("/search")}
+              variant="text"
+              sx={{ color: "#FFF" }}
+            >
               <img src={SearchIcon} alt="Иконка поиска" />
-            </SearchIconWrapper>
-            {/* Сам инпут */}
-            <StyledInputBase
-              placeholder="Поиск по названию вакансии"
-              sx={{
-                width: "507px",
-                height: "40px",
-              }}
-            /> */}
-          </Search>
+              Поиск кандидатов
+            </Button>
+          )}
+
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton sx={{ padding: "0", marginRight: "52px" }}>
