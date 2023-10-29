@@ -1,26 +1,23 @@
-import * as React from "react"
 import { styled, alpha } from "@mui/material/styles"
-// import { makeStyles } from "@material-ui/core/styles"
 import AppBar from "@mui/material/AppBar"
 import Box from "@mui/material/Box"
 import Toolbar from "@mui/material/Toolbar"
 import IconButton from "@mui/material/IconButton"
-import InputBase from "@mui/material/InputBase"
 import SearchIcon from "../../ui-kit/icons/search.svg"
 import NotificationIcon from "../../ui-kit/icons/bell.svg"
 import UserIcon from "../../ui-kit/icons/user.svg"
 import GroupIcon from "../../ui-kit/icons/letter.svg"
 import Logo from "../../ui-kit/icons/career-logo-1b10b20f 1.svg"
-import { ArrowRightIcon } from "@mui/x-date-pickers"
+import { Button } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
+  // "&:hover": {
+  //   backgroundColor: alpha(theme.palette.common.white, 0.25),
+  // },
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "100%",
@@ -76,9 +73,8 @@ function Header() {
               sx={{
                 width: "507px",
                 height: "40px",
-                // backgroundColor: "#FFF",
               }}
-            />
+            /> */}
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
