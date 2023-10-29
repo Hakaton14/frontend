@@ -1,18 +1,43 @@
-import { Avatar } from "@mui/material"
+import { Avatar, Button } from "@mui/material"
 import { useChangeTitle } from "@Hooks"
-import { AvatarResumeMoke } from "@IconResume"
+import { AvatarResumeMoke, CloseMini } from "@IconResume"
 import { ToolBar } from "./ToolBar/ToolBar"
 import { ButtonPanel } from "./ButtonPanel/ButtonPanel"
 import { Bio } from "./Bio/Bio"
 import { BasicInfo } from "./BasicInfo/BasicInfo"
 import { Resume } from "./MokeData"
 import styles from "./CandidateResume.module.scss"
+import { FC } from "react"
+const styleSx = {
+  btn: {
+    position: "absolute",
+    top: "16px",
+    right: "16px",
+    minWidth: 24,
+    width: 24,
+    height: 24,
+    padding: 0,
+    display: "block",
+  },
+}
 
-const CandidateResume = () => {
+interface CandidateResumeProps {
+  onClose: () => void
+}
+
+const CandidateResume: FC<CandidateResumeProps> = ({ onClose }) => {
   useChangeTitle("Анкета Кандидата")
+
+  const onClickClouse = () => {
+    onClose()
+  }
 
   return (
     <section className={styles.Container}>
+      <Button sx={styleSx.btn} onClick={onClickClouse}>
+        <img src={CloseMini} alt="иконка закрытия" />
+      </Button>
+
       <div className={styles.ToolBar}>
         <ToolBar />
       </div>
