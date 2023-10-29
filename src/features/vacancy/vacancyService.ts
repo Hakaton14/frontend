@@ -24,21 +24,9 @@ const json = localStorage.getItem("user")
 const user = json && JSON.parse(json)
 
 const createVacancy = async (vacancyData: IVacancyData) => {
-  const newData = {
-    ...vacancyData,
-    testcase: "ddd",
-    description: "2112",
-    // skills: [5],
-    languages: [
-      {
-        language: 1,
-        level: 1,
-      },
-    ],
-  }
-  const response = await axios.post(`${API_URL}/vacancies/`, newData, {
+  const response = await axios.post(`${API_URL}/vacancies/`, vacancyData, {
     headers: {
-      "content-type": "application/x-www-form-urlencoded;charset=windows-1251",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${user.access}`,
     },
   })

@@ -15,7 +15,13 @@ import {
   Button,
   Autocomplete,
 } from "@mui/material"
-import { Fragment, SyntheticEvent, useEffect, useState } from "react"
+import {
+  Fragment,
+  SyntheticEvent,
+  useEffect,
+  useState,
+  ChangeEvent,
+} from "react"
 import {
   getCity,
   getCurrency,
@@ -29,6 +35,7 @@ import { createVacancy } from "@Features"
 
 type VacancyFormProps = {
   tab: number
+  togglePopup: () => void
 }
 
 type TSelectedOpt = {
@@ -36,11 +43,12 @@ type TSelectedOpt = {
   name: string
 }
 
-function VacancyForm({ tab }: VacancyFormProps) {
+function VacancyForm({ tab, togglePopup }: VacancyFormProps) {
   const {
     register,
     handleSubmit,
     watch,
+    getValues,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(vacancyShema),
@@ -48,11 +56,10 @@ function VacancyForm({ tab }: VacancyFormProps) {
       employment: "2",
       experience: "1",
       currency: "4",
-      schedule: "1"
-    }
+      schedule: "1",
+    },
   })
-  // const [options, setOptions] = useState<string[]>([])
-  // const [currencyOpts, setCurrencyOpts] = useState<object[]>([])
+  const [radioVal, setRadioVal] = useState("")
 
   const dispatch = useAppDispatch()
   const {
@@ -89,15 +96,17 @@ function VacancyForm({ tab }: VacancyFormProps) {
     setSelectedSkills([...selectedSkill])
   }
 
-  // const onSubmit = (evt: SyntheticEvent) => {
-  //   evt.city = console.log(evt)
-  // }
-  useEffect(() => {
-    const subscription = watch((value, { name, type }) => {
-      console.log(value, name, type)
-    })
-    return () => subscription.unsubscribe()
-  }, [watch])
+  const handleRadioChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setRadioVal((evt.target as HTMLInputElement).value)
+  }
+
+  // useEffect(() => {
+  //   const subscription = watch((value, { name, type }) =>
+  //     // console.log(value, name, type),
+  //     console.log(getValues("radioOfficeAddress")),
+  //   )
+  //   return () => subscription.unsubscribe()
+  // }, [watch])
 
   useEffect(() => {
     dispatch(getCurrency())
@@ -180,24 +189,26 @@ function VacancyForm({ tab }: VacancyFormProps) {
               </FormLabel>
               <RadioGroup
                 aria-labelledby="office-radio-buttons-group-label"
-                defaultValue="Не указывать адрес"
+                defaultValue={"true"}
+                value={radioVal}
+                onChange={handleRadioChange}
                 name="radio-buttons-group"
               >
                 <FormControlLabel
                   {...register("radioOfficeAddress")}
-                  value={false}
+                  value={"true"}
                   control={<Radio />}
                   label="Не указывать адрес"
                 />
                 <FormControlLabel
                   {...register("radioOfficeAddress")}
-                  value={true}
+                  value={"false"}
                   control={<Radio />}
                   label="Указать адрес"
                 />
               </RadioGroup>
               <Input
-                disabled
+                disabled={radioVal === "true" ? true : false}
                 type={"text"}
                 placeholder={"Адрес офиса"}
                 register={register}
@@ -413,13 +424,17 @@ function VacancyForm({ tab }: VacancyFormProps) {
     <form
       noValidate
       onSubmit={handleSubmit((data) => {
-        data.city = selectedCity?.id
-        data.skills = selectedSkills.map((skill) => skill.id)
-        data.employment = Number(data.employment)
-        data.experience = Number(data.experience)
-        data.schedule = Number(data.schedule)
-        data.currency = Number(data.currency)
-        dispatch(createVacancy(data))
+        const transformedData = {
+          ...data,
+          city: selectedCity?.id,
+          skills: selectedSkills.map((skill) => skill.id),
+          employment: Number(data.employment),
+          experience: Number(data.experience),
+          schedule: Number(data.schedule),
+          currency: Number(data.currency),
+        }
+        togglePopup()
+        dispatch(createVacancy(transformedData))
       })}
     >
       {tab ? <Aditionalields /> : <MainFields />}
