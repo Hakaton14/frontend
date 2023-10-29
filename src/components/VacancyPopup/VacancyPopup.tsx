@@ -63,7 +63,7 @@ function VacancyPopup({ togglePopup, isOpen }: VacancyPopupProps) {
         <>x</>
       </IconButton>
       <DialogContent sx={{ width: "900px" }}>
-        <VacancyForm tab={value} />
+        <VacancyForm tab={value} togglePopup={togglePopup} />
       </DialogContent>
     </Dialog>
   )

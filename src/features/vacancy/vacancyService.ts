@@ -1,5 +1,6 @@
 import axios from "axios"
 interface IVacancyData {
+  id: number
   hr: number
   name: string
   skills: string
@@ -24,21 +25,35 @@ const json = localStorage.getItem("user")
 const user = json && JSON.parse(json)
 
 const createVacancy = async (vacancyData: IVacancyData) => {
-  const newData = {
-    ...vacancyData,
-    testcase: "ddd",
-    description: "2112",
-    // skills: [5],
-    languages: [
-      {
-        language: 1,
-        level: 1,
-      },
-    ],
-  }
-  const response = await axios.post(`${API_URL}/vacancies/`, newData, {
+  const response = await axios.post(`${API_URL}/vacancies/`, vacancyData, {
     headers: {
-      "content-type": "application/x-www-form-urlencoded;charset=windows-1251",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${user.access}`,
+    },
+  })
+
+  return response.data
+}
+
+const updateVacancy = async (vacancyData: IVacancyData) => {
+  const response = await axios.patch(
+    `${API_URL}/vacancies/${vacancyData.id}`,
+    vacancyData,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.access}`,
+      },
+    },
+  )
+
+  return response.data
+}
+
+const getVacancies = async () => {
+  const response = await axios.get(`${API_URL}/vacancies/`, {
+    headers: {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${user.access}`,
     },
   })
@@ -48,6 +63,7 @@ const createVacancy = async (vacancyData: IVacancyData) => {
 
 const vacancyService = {
   createVacancy,
+  getVacancies,
 }
 
 export default vacancyService

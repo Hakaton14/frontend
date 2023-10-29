@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useState, useEffect } from "react"
 import styles from "./MainScreen.module.scss"
 import Header from "../Header/Header"
 import Calendar from "../Calendar/Calendar"
@@ -6,12 +6,36 @@ import CandidateTable from "../CandidateTable/CandidateTable"
 import { Button } from "@mui/material"
 import AddIcon from "../../ui-kit/icons/add.svg"
 import { VacancyPopup } from "@Components"
+import {
+  getCity,
+  getCurrency,
+  getEmployments,
+  getExperiences,
+  getSchedules,
+  getSkills,
+  getVacancies,
+} from "@Features"
+import { useAppDispatch, useAppSelector } from "@ReduxHooks"
 
 const MainScreen: FC = () => {
   const [openPopup, setOpenPopup] = useState(false)
+  const dispatch = useAppDispatch()
+  const user = useAppSelector((state) => state.auth.user)
+  const vacancies = useAppSelector((state) => state.vacancies.vacancyList)
   const handleClick = () => {
     setOpenPopup(!openPopup)
   }
+
+  useEffect(() => {
+    dispatch(getCurrency())
+    dispatch(getCity())
+    dispatch(getSkills())
+    dispatch(getSchedules())
+    dispatch(getEmployments())
+    dispatch(getExperiences())
+    dispatch(getVacancies())
+  }, [])
+
   return (
     <>
       <Header />
@@ -19,7 +43,7 @@ const MainScreen: FC = () => {
 
       <div className={styles.mainContainer}>
         <div className={styles.container}>
-          <h1 className={styles.title}>Добрый день, Александра</h1>
+          <h1 className={styles.title}>Добрый день, {user?.first_name}</h1>
           <div className={styles.buttonWrapper}>
             <Button
               sx={{
@@ -66,7 +90,7 @@ const MainScreen: FC = () => {
                 textTransform: "none",
               }}
             >
-              Активные (3)
+              Активные ({vacancies.length})
             </Button>
             <Button
               sx={{

@@ -27,31 +27,33 @@ const Search = styled("div")(({ theme }) => ({
   },
 }))
 
-// const SearchIconWrapper = styled("div")(({ theme }) => ({
-//   padding: theme.spacing(0, 2),
-//   height: "100%",
-//   position: "absolute",
-//   pointerEvents: "none",
-//   display: "flex",
-//   alignItems: "center",
-//   justifyContent: "center",
-// }))
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  // padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}))
 
-// const StyledInputBase = styled(InputBase)(({ theme }) => ({
-//   color: "inherit",
-//   "& .MuiInputBase-input": {
-//     padding: theme.spacing(1, 1, 1, 0),
-//     // vertical padding + font size from searchIcon
-//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-//     transition: theme.transitions.create("width"),
-//     width: "100%",
-//     [theme.breakpoints.up("md")]: {
-//       width: "20ch",
-//     },
-//   },
-// }))
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    // [theme.breakpoints.up("md")]: {
+    //   width: "20ch",
+    // },
+  },
+}))
 
 function Header() {
+  const navigate = useNavigate()
+
   return (
     <Box sx={{ flexGrow: 1, Width: "100%" }}>
       <AppBar position="static" sx={{ backgroundColor: "#1A1B22" }}>
@@ -61,34 +63,12 @@ function Header() {
             alt="Логотип"
             style={{ margin: "10px 148px 10px 83px" }}
           />
-          <Search
-            sx={{
-              background: "#FFF",
-              margin: "0",
-              alignItems: "left",
-            }}
-          >
-            <Button
-              sx={{
-                padding: "0",
-                fontSize: "14px",
-                fontStyle: "normal",
-                fontWeight: "400",
-                lineHeight: "20px",
-                width: "507px",
-                height: "40px",
-                color: "#797981",
-                textTransform: "none",
-              }}
-            >
-              <img src={SearchIcon} alt="Иконка поиска" />
-              Поиск по названию вакансии
-            </Button>
-            {/* <SearchIconWrapper>
+          <Search onClick={() => navigate("/search")}>
+            <SearchIconWrapper>
               <img src={SearchIcon} alt="Иконка поиска" />
             </SearchIconWrapper>
             {/* Сам инпут */}
-            {/* <StyledInputBase
+            <StyledInputBase
               placeholder="Поиск по названию вакансии"
               sx={{
                 width: "507px",
