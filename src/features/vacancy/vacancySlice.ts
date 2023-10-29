@@ -54,23 +54,38 @@ const initialState: IinitialState = {
 
 export const getVacancies = createAsyncThunk(
   "vacancy/get",
-  async (thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
       return vacancyService.getVacancies()
-    } catch (error) {}
+    } catch (error) {
+      const err = error as AxiosError
+      return thunkAPI.rejectWithValue(err.response?.data)
+    }
   },
 )
 export const createVacancy = createAsyncThunk(
   "vacancy/create",
   async (vacancyData: any, thunkAPI) => {
-    console.log(vacancyData)
     try {
       return vacancyService.createVacancy(vacancyData)
-    } catch (error) {}
+    } catch (error) {
+      const err = error as AxiosError
+      return thunkAPI.rejectWithValue(err.response?.data)
+    }
   },
 )
 
-// export const updateVacancy = createAsyncThunk()
+export const updateVacancy = createAsyncThunk(
+  "vacancy/update",
+  async (vacancyData: any, thunkAPI) => {
+    try {
+      return vacancyService.createVacancy(vacancyData)
+    } catch (error) {
+      const err = error as AxiosError
+      return thunkAPI.rejectWithValue(err.response?.data)
+    }
+  },
+)
 // export const deleteVacancy = createAsyncThunk()
 
 const vacanciesSlice = createSlice({
@@ -79,17 +94,32 @@ const vacanciesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(createVacancy.pending, (state) => {})
+      .addCase(createVacancy.pending, (state) => {
+        state.isLoading = true
+      })
       .addCase(createVacancy.fulfilled, (state, action) => {
         state.vacancyList.push(action.payload)
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
       })
-      .addCase(createVacancy.rejected, (state) => {})
+      .addCase(createVacancy.rejected, (state) => {
+        state.isLoading = false
+        state.isError = true
+      })
 
       .addCase(getVacancies.pending, (state) => {})
       .addCase(getVacancies.fulfilled, (state, action) => {
         state.vacancyList = action.payload
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
       })
-      .addCase(getVacancies.rejected, (state) => {})
+      .addCase(getVacancies.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
   },
 })
 

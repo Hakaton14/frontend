@@ -1,5 +1,6 @@
 import axios from "axios"
 interface IVacancyData {
+  id: number
   hr: number
   name: string
   skills: string
@@ -33,6 +34,22 @@ const createVacancy = async (vacancyData: IVacancyData) => {
 
   return response.data
 }
+
+const updateVacancy = async (vacancyData: IVacancyData) => {
+  const response = await axios.patch(
+    `${API_URL}/vacancies/${vacancyData.id}`,
+    vacancyData,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.access}`,
+      },
+    },
+  )
+
+  return response.data
+}
+
 const getVacancies = async () => {
   const response = await axios.get(`${API_URL}/vacancies/`, {
     headers: {
