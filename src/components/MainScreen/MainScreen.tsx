@@ -21,7 +21,7 @@ const MainScreen: FC = () => {
   const [openPopup, setOpenPopup] = useState(false)
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.auth.user)
-  const vacancies = useAppSelector((state)=> state.vacancies.vacancyList)
+  const vacancies = useAppSelector((state) => state.vacancies.vacancyList)
   const handleClick = () => {
     setOpenPopup(!openPopup)
   }

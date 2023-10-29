@@ -1,4 +1,3 @@
-import * as React from "react"
 import styles from "./CandidateTable.module.scss"
 import Accordion from "@mui/material/Accordion"
 import AccordionSummary from "@mui/material/AccordionSummary"
