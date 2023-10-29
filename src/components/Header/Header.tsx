@@ -12,6 +12,7 @@ import UserIcon from "../../ui-kit/icons/user.svg"
 import GroupIcon from "../../ui-kit/icons/letter.svg"
 import Logo from "../../ui-kit/icons/career-logo-1b10b20f 1.svg"
 import { ArrowRightIcon } from "@mui/x-date-pickers"
+import { useNavigate } from "react-router-dom"
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -54,6 +55,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }))
 
 function Header() {
+  const navigate = useNavigate()
+
   return (
     <Box sx={{ flexGrow: 1, Width: "100%" }}>
       <AppBar position="static" sx={{ backgroundColor: "#1A1B22" }}>
@@ -63,7 +66,7 @@ function Header() {
             alt="Логотип"
             style={{ margin: "10px 148px 10px 83px" }}
           />
-          <Search>
+          <Search onClick={() => navigate("/search")}>
             <SearchIconWrapper>
               <img src={SearchIcon} alt="Иконка поиска" />
             </SearchIconWrapper>
@@ -76,7 +79,6 @@ function Header() {
                 // backgroundColor: "#FFF",
               }}
             />
-            <ArrowRightIcon sx={{pt:1}}/>
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
