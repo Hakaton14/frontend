@@ -15,21 +15,8 @@ import {
   Button,
   Autocomplete,
 } from "@mui/material"
-import {
-  Fragment,
-  SyntheticEvent,
-  useEffect,
-  useState,
-  ChangeEvent,
-} from "react"
-import {
-  getCity,
-  getCurrency,
-  getEmployments,
-  getExperiences,
-  getSchedules,
-  getSkills,
-} from "@Features"
+import { Fragment, SyntheticEvent, useState, ChangeEvent } from "react"
+
 import { useAppDispatch, useAppSelector } from "@ReduxHooks"
 import { createVacancy } from "@Features"
 
@@ -47,8 +34,6 @@ function VacancyForm({ tab, togglePopup }: VacancyFormProps) {
   const {
     register,
     handleSubmit,
-    watch,
-    getValues,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(vacancyShema),
@@ -70,10 +55,6 @@ function VacancyForm({ tab, togglePopup }: VacancyFormProps) {
     experienceOpt,
     employmentsOpt,
   } = useAppSelector((state) => state.filters)
-
-  // const onChangehandle = async (value: any) => {
-  //   dispatch(getCity())
-  // }
 
   const [selectedCity, setSelectedCity] = useState<TSelectedOpt | null>(null)
   const [selectedSkills, setSelectedSkills] = useState<TSelectedOpt[]>([])
@@ -99,23 +80,6 @@ function VacancyForm({ tab, togglePopup }: VacancyFormProps) {
   const handleRadioChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setRadioVal((evt.target as HTMLInputElement).value)
   }
-
-  // useEffect(() => {
-  //   const subscription = watch((value, { name, type }) =>
-  //     // console.log(value, name, type),
-  //     console.log(getValues("radioOfficeAddress")),
-  //   )
-  //   return () => subscription.unsubscribe()
-  // }, [watch])
-
-  useEffect(() => {
-    dispatch(getCurrency())
-    dispatch(getCity())
-    dispatch(getSkills())
-    dispatch(getSchedules())
-    dispatch(getEmployments())
-    dispatch(getExperiences())
-  }, [])
 
   const MainFields = () => (
     <Fragment>

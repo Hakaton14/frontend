@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useState, useEffect } from "react"
 import styles from "./MainScreen.module.scss"
 import Header from "../Header/Header"
 import Calendar from "../Calendar/Calendar"
@@ -6,12 +6,32 @@ import CandidateTable from "../CandidateTable/CandidateTable"
 import { Button } from "@mui/material"
 import AddIcon from "../../ui-kit/icons/add.svg"
 import { VacancyPopup } from "@Components"
+import {
+  getCity,
+  getCurrency,
+  getEmployments,
+  getExperiences,
+  getSchedules,
+  getSkills,
+} from "@Features"
+import { useAppDispatch, useAppSelector } from "@ReduxHooks"
 
 const MainScreen: FC = () => {
   const [openPopup, setOpenPopup] = useState(false)
+  const dispatch = useAppDispatch()
   const handleClick = () => {
     setOpenPopup(!openPopup)
   }
+
+  useEffect(() => {
+    dispatch(getCurrency())
+    dispatch(getCity())
+    dispatch(getSkills())
+    dispatch(getSchedules())
+    dispatch(getEmployments())
+    dispatch(getExperiences())
+  }, [])
+
   return (
     <>
       <Header />
