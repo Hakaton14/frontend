@@ -1,5 +1,6 @@
 import { Button, Typography, Stack, Grid } from "@mui/material"
 import Header from "../Header/Header"
+import Filters from "../Filters/Filters"
 import styles from "./Serach.module.scss"
 import ArrowIcon from "../../ui-kit/icons/Long arrow.svg"
 import Filtercon from "../../ui-kit/icons/filter_icon.svg"
