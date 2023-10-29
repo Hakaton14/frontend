@@ -2,7 +2,7 @@ export const Resume = {
   fullName: "Иванова Мария Алексеевна",
   occupation: "UX/UI Дизайнер",
   contacts: {
-    phone: "1234567890",
+    phone: "+7 (999) - 999 - 99 - 99",
     mail: "example@example.com",
     vk: "https://vk.com/username",
     telegram: "https://t.me/username",
