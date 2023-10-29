@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit"
 import { authReducer } from "@Features"
+import { filtersReducer } from "@Features"
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+    filters: filtersReducer,
   },
 })
 

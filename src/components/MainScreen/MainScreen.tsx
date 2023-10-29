@@ -1,15 +1,22 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import styles from "./MainScreen.module.scss"
 import Header from "../Header/Header"
 import Calendar from "../Calendar/Calendar"
 import CandidateTable from "../CandidateTable/CandidateTable"
 import { Button } from "@mui/material"
 import AddIcon from "../../ui-kit/icons/add.svg"
+import { VacancyPopup } from "@Components"
 
 const MainScreen: FC = () => {
+  const [openPopup, setOpenPopup] = useState(false)
+  const handleClick = () => {
+    setOpenPopup(!openPopup)
+  }
   return (
     <>
       <Header />
+      <VacancyPopup isOpen={openPopup} togglePopup={handleClick} />
+
       <div className={styles.mainContainer}>
         <div className={styles.container}>
           <h1 className={styles.title}>Добрый день, Александра</h1>
@@ -28,6 +35,7 @@ const MainScreen: FC = () => {
               Мои вакансии
             </Button>
             <Button
+              onClick={handleClick}
               sx={{
                 padding: "0",
                 fontSize: "20px",

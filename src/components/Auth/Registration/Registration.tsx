@@ -1,14 +1,17 @@
 import { FC, useEffect } from "react"
 import { useForm } from "react-hook-form"
-import styles from "./Registration.module.scss"
 import { Input } from "@UI"
 import { Button } from "@mui/material"
 import { registrationShema } from "@Utils"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useAppDispatch, useAppSelector } from "@ReduxHooks"
-import { login, signUp } from "@Features"
+import { signUp } from "@Features"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router"
+import { useChangeTitle } from "@Hooks"
+
+import styles from "./Registration.module.scss"
+
 type formRegistration = {
   first_name: string
   last_name: string
@@ -18,6 +21,7 @@ type formRegistration = {
 }
 
 const Registration: FC = () => {
+  useChangeTitle("Регистрация")
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { user, isSuccess, isError } = useAppSelector((state) => state.auth)
