@@ -31,15 +31,21 @@ export type TInputProps = {
   customLabel?: string
   register?: any
   registerName?: string
+  registerOptions?: any
 }
 
 const Input = (props: TextFieldProps & TInputProps) => {
-  const { customLabel, register, registerName, sx, ...rest } = props
+  const { customLabel, register, registerName, registerOptions, sx, ...rest } =
+    props
 
   return (
     <>
-      {customLabel && <span className={styles.LabelСustom}>Custom</span>}
-      <TextField {...register(`${registerName}`)} sx={sxStyles} {...rest} />
+      {customLabel && <span className={styles.LabelСustom}>{customLabel}</span>}
+      <TextField
+        {...register(`${registerName}`, registerOptions)}
+        sx={sxStyles}
+        {...rest}
+      />
     </>
   )
 }

@@ -19,7 +19,6 @@ interface IinitialState {
   isLoading: boolean
   isError: boolean
   isSuccess: boolean
-
   message: string | unknown
 }
 
