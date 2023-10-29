@@ -3,13 +3,13 @@ import AppBar from "@mui/material/AppBar"
 import Box from "@mui/material/Box"
 import Toolbar from "@mui/material/Toolbar"
 import IconButton from "@mui/material/IconButton"
-// import InputBase from "@mui/material/InputBase"
 import SearchIcon from "../../ui-kit/icons/search.svg"
 import NotificationIcon from "../../ui-kit/icons/bell.svg"
 import UserIcon from "../../ui-kit/icons/user.svg"
 import GroupIcon from "../../ui-kit/icons/letter.svg"
 import Logo from "../../ui-kit/icons/career-logo-1b10b20f 1.svg"
 import { Button } from "@mui/material"
+import { useNavigate } from "react-router-dom"
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -75,9 +75,9 @@ function Header() {
                 fontStyle: "normal",
                 fontWeight: "400",
                 lineHeight: "20px",
-                color: "#797981",
                 width: "507px",
                 height: "40px",
+                color: "#797981",
                 textTransform: "none",
               }}
             >
@@ -87,12 +87,12 @@ function Header() {
             {/* <SearchIconWrapper>
               <img src={SearchIcon} alt="Иконка поиска" />
             </SearchIconWrapper>
-            <StyledInputBase
+            {/* Сам инпут */}
+            {/* <StyledInputBase
               placeholder="Поиск по названию вакансии"
               sx={{
                 width: "507px",
                 height: "40px",
-                // backgroundColor: "#FFF",
               }}
             /> */}
           </Search>
