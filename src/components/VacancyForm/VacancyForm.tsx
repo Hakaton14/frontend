@@ -44,7 +44,7 @@ function VacancyForm({ tab, togglePopup }: VacancyFormProps) {
       schedule: "1",
     },
   })
-  const [radioVal, setRadioVal] = useState("")
+  const [radioVal, setRadioVal] = useState("true")
 
   const dispatch = useAppDispatch()
   const {
@@ -153,7 +153,6 @@ function VacancyForm({ tab, togglePopup }: VacancyFormProps) {
               </FormLabel>
               <RadioGroup
                 aria-labelledby="office-radio-buttons-group-label"
-                defaultValue={"true"}
                 value={radioVal}
                 onChange={handleRadioChange}
                 name="radio-buttons-group"

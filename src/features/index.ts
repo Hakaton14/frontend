@@ -6,8 +6,15 @@ export { signUp, login, logout } from "./auth/authSlice"
 
 export { default as filtersReducer } from "./filters/filtersSlice"
 export { default as filtersService } from "./filters/filtersService"
-export { getCity, getCurrency, getSkills, getSchedules, getExperiences, getEmployments } from "./filters/filtersSlice"
+export {
+  getCity,
+  getCurrency,
+  getSkills,
+  getSchedules,
+  getExperiences,
+  getEmployments,
+} from "./filters/filtersSlice"
 
 export { default as vacancyReducer } from "./vacancy/vacancySlice"
 export { default as vacancyService } from "./vacancy/vacancyService"
-export { createVacancy } from "./vacancy/vacancySlice"
+export { createVacancy, getVacancies } from "./vacancy/vacancySlice"

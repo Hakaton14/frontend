@@ -33,9 +33,20 @@ const createVacancy = async (vacancyData: IVacancyData) => {
 
   return response.data
 }
+const getVacancies = async () => {
+  const response = await axios.get(`${API_URL}/vacancies/`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${user.access}`,
+    },
+  })
+
+  return response.data
+}
 
 const vacancyService = {
   createVacancy,
+  getVacancies,
 }
 
 export default vacancyService
