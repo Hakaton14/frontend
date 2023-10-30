@@ -43,8 +43,8 @@ jobs:
           script: |
             cd hakaton
             sudo docker compose -f docker-compose.production.yml down
-            sudo docker compose -f docker-compose.production.yml down
             sudo docker image rm thesuncatcher222/hakaton_14_frontend
+            sudo docker image rm thesuncatcher222/hakaton_14_gateway
             sudo docker image rm volume hakaton_media_volume
             sudo docker image prune --force
             sudo docker compose -f docker-compose.production.yml up -d --build
