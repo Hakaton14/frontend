@@ -7,7 +7,7 @@
   height: 122px;
   padding-left: 0px;
   align-items: center;
-  gap: 42px;
+  gap: 32px;
 }
 
 .fotoIcon {
@@ -18,6 +18,7 @@
 }
 
 .infoWrapper {
+  min-width: 200px;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -56,8 +57,9 @@
 .skillsWrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  min-width: 400px;
 }
 
 .iconsWrapper {

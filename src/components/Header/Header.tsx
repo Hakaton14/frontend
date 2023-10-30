@@ -10,10 +10,14 @@ import Logo from "../../ui-kit/icons/career-logo-1b10b20f 1.svg"
 import { Button } from "@mui/material"
 import { useLocation, useNavigate } from "react-router-dom"
 import styles from "./Header.module.scss"
+import { useAppDispatch } from "@ReduxHooks"
+import { reset } from "@Features"
 
 function Header() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
+  const dispatch = useAppDispatch()
+
   return (
     <Box sx={{ flexGrow: 1, Width: "100%" }}>
       <AppBar position="static" sx={{ backgroundColor: "#1A1B22" }}>
@@ -40,7 +44,13 @@ function Header() {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton sx={{ padding: "0", marginRight: "52px" }}>
+            <IconButton
+              sx={{ padding: "0", marginRight: "52px" }}
+              onClick={() => {
+                localStorage.clear()
+                dispatch(reset())
+              }}
+            >
               <img src={UserIcon} alt="Иконка пользователя" />
             </IconButton>
             <IconButton
