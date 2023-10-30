@@ -11,7 +11,6 @@ import { Filters } from "@Components"
 
 function Search() {
   const dispatch = useAppDispatch()
-  const { isLoading } = useAppSelector((state) => state.filters)
   const { results } = useAppSelector((state) => state.search)
 
   const navigate = useNavigate()

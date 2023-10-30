@@ -1,5 +1,5 @@
 import { AppointmentCard, Calendar, CurrentDate } from "@Components"
-import { Box, Typography } from "@mui/material"
+import { Typography } from "@mui/material"
 import styles from "./Planner.module.css"
 function Planner() {
   return (

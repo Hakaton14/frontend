@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Button,
   IconButton,
   MenuItem,
   Paper,
@@ -71,15 +70,11 @@ function CandidatInfoTable() {
             </TableCell>
             <TableCell align="left">Статус трудоустройства</TableCell>
             <TableCell align="left">Учебный статус</TableCell>
-            {/* <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow
-            // key={row.name}
-            // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
+            <TableRow key={row.number}>
               <TableCell component="th" scope="row">
                 {row.number}
               </TableCell>
@@ -129,11 +124,9 @@ function CandidatInfoTable() {
                 </TextField>
               </TableCell>
               <TableCell
-                // align="space-between"
                 sx={{
                   padding: "0",
                   width: "210px",
-                  // justifyContent: "space-between",
                 }}
               >
                 {row.staduStatus}
@@ -141,9 +134,6 @@ function CandidatInfoTable() {
                   <img src={TrashIcon} alt="Иконка корзины" />
                 </IconButton>
               </TableCell>
-              {/* <TableCell align="left" sx={{ padding: "0" }}>
-
-              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>
