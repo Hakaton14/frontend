@@ -6,7 +6,9 @@ import { store } from "./app/store"
 import { App } from "@Components"
 import { ThemeProvider } from "@mui/material"
 import { ThemeOptions, createTheme } from "@mui/material/styles"
-import "./index.css"
+
+import "./styles/reset.scss"
+import "./index.scss"
 
 export const themeOptions: ThemeOptions = {
   palette: {

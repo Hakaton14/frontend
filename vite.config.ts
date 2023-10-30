@@ -13,6 +13,7 @@ export default defineConfig({
       "@ReduxHooks": "./src/app/index.ts",
       "@Utils": "./src/utils/index.ts",
       "@Features": "./src/features/index.ts",
+      "@IconResume": "./src/ui-kit/icons/resume/index.ts",
     },
   },
   server: {
