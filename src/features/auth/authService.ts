@@ -1,10 +1,9 @@
 import axios from "axios"
+import { API_URL } from "@Utils"
 interface IUserData {
   email: string
   password: string
 }
-//TODO Вынести в .env
-const API_URL = "http://127.0.0.1:8000/api/v1"
 
 //Регистрация пользователя
 //TODO Дописать типы юзера
