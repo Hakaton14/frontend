@@ -8,12 +8,6 @@ import { useState } from "react"
 
 const calendarHeaderPropsStyles = {
   sx: {
-    ".MuiDateCalendar-root": { margin: "0" },
-    ".MuiPickersCalendarHeader-root": {
-      display: "flex",
-      alignItems: "center",
-      justifyItems: "center",
-    },
     ".MuiPickersCalendarHeader-root:first-of-type": {
       order: 0,
       paddingRight: "20px",
@@ -35,6 +29,12 @@ const calendarHeaderPropsStyles = {
     },
     ".css-9reuh9-MuiPickersArrowSwitcher-root": {
       marginLeft: "-2px",
+    },
+    ".MuiDateCalendar-root": { margin: "0" },
+    ".MuiPickersCalendarHeader-root": {
+      display: "flex",
+      alignItems: "center",
+      justifyItems: "center",
     },
     ".MuiPickersArrowSwitcher-button": {
       paddingRight: "7px",
