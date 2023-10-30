@@ -2,7 +2,6 @@ import { Button, Typography, Stack, Grid } from "@mui/material"
 import Header from "../Header/Header"
 import styles from "./Serach.module.scss"
 import ArrowIcon from "../../ui-kit/icons/Long arrow.svg"
-import Filtercon from "../../ui-kit/icons/filter_icon.svg"
 import СandidateСard from "../СandidateСard/СandidateСard"
 import { useAppDispatch, useAppSelector } from "@ReduxHooks"
 import { getStudents } from "@Features"
@@ -12,7 +11,9 @@ import { Filters } from "@Components"
 
 function Search() {
   const dispatch = useAppDispatch()
-  const { results, isLoading } = useAppSelector((state) => state.search)
+  const { isLoading } = useAppSelector((state) => state.filters)
+  const { results } = useAppSelector((state) => state.search)
+
   const navigate = useNavigate()
   useEffect(() => {
     dispatch(getStudents(""))

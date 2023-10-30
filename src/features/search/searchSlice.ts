@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { AxiosError } from "axios"
 import { searchService } from "@Features"
 interface IResult {
@@ -16,6 +16,7 @@ interface ISkill {
 }
 
 interface IinitialState {
+  query: string
   results: IResult[] | null
   isLoading: boolean
   isError: boolean
@@ -24,6 +25,7 @@ interface IinitialState {
 }
 
 const initialState: IinitialState = {
+  query: "",
   results: [],
   isLoading: false,
   isError: false,
@@ -46,7 +48,11 @@ export const getStudents = createAsyncThunk(
 const searchSlice = createSlice({
   name: "search",
   initialState,
-  reducers: {},
+  reducers: {
+    setQuery: (state, action: PayloadAction<string>) => {
+      state.query = action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getStudents.pending, (state) => {
@@ -65,5 +71,5 @@ const searchSlice = createSlice({
       })
   },
 })
-
+export const { setQuery } = searchSlice.actions
 export default searchSlice.reducer

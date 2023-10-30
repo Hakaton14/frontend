@@ -387,6 +387,7 @@ function VacancyForm({ tab, togglePopup }: VacancyFormProps) {
     <form
       noValidate
       onSubmit={handleSubmit((data) => {
+        console.log(data)
         const transformedData = {
           ...data,
           city: selectedCity?.id,

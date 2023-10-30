@@ -1,7 +1,5 @@
 import axios from "axios"
-
-//TODO Вынести в .env
-const API_URL = "http://127.0.0.1:8000/api/v1"
+import { API_URL } from "@Utils"
 
 const getCity = async () => {
   const json = localStorage.getItem("user")

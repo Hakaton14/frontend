@@ -89,8 +89,7 @@ export const vacancyShema = yup.object().shape({
   schedule: yup.string(),
 })
 export const filterShema = yup.object().shape({
-  name: yup.string().required("Заполните поле"),
-  skills: yup.string().required("Заполните поле"),
+  skills: yup.string(),
   experience: yup.string().required("Заполните поле"),
   radioOfficeAddress: yup.boolean(),
   address: yup.string(),
@@ -98,9 +97,6 @@ export const filterShema = yup.object().shape({
   salary_from: yup.string(),
   salary_to: yup.string(),
   currency: yup.string(),
-  responsibilities: yup.string().required("Заполните поле"),
-  requirements: yup.string().required("Заполните поле"),
-  conditions: yup.string().required("Заполните поле"),
   lang: yup.string(),
   langGrade: yup.string(),
   employment: yup.string(),

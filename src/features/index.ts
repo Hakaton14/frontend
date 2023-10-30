@@ -21,4 +21,4 @@ export { createVacancy, getVacancies } from "./vacancy/vacancySlice"
 
 export { default as searchReducer } from "./search/searchSlice"
 export { default as searchService } from "./search/searchService"
-export { getStudents } from "./search/searchSlice"
+export { getStudents, setQuery } from "./search/searchSlice"

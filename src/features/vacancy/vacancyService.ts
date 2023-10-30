@@ -1,3 +1,4 @@
+import { API_URL } from "@Utils"
 import axios from "axios"
 interface IVacancyData {
   id: number
@@ -19,8 +20,7 @@ interface IVacancyData {
   workload: string
   workHours: string
 }
-//TODO Вынести в .env
-const API_URL = "http://127.0.0.1:8000/api/v1"
+
 const json = localStorage.getItem("user")
 const user = json && JSON.parse(json)
 

@@ -14,7 +14,7 @@ const calendarHeaderPropsStyles = {
       alignItems: "center",
       justifyItems: "center",
     },
-    ".MuiPickersCalendarHeader-root:first-child": {
+    ".MuiPickersCalendarHeader-root:first-of-type": {
       order: 0,
       paddingRight: "20px",
       paddingLeft: "20px",

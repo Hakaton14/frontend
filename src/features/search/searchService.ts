@@ -1,11 +1,14 @@
 import axios from "axios"
-const API_URL = "http://127.0.0.1:8000/api/v1"
+import { API_URL } from "@Utils"
 const json = localStorage.getItem("user")
 const user = json && JSON.parse(json)
 
 const getStudents = async (query: any) => {
   const response = await axios.get(`${API_URL}/students/`, {
     params: query,
+    paramsSerializer: {
+      indexes: null,
+    },
     headers: {
       Authorization: `Bearer ${user.access}`,
     },

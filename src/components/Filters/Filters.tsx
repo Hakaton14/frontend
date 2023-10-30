@@ -12,9 +12,10 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
 import { filterShema } from "@Utils"
-import { useAppSelector } from "@ReduxHooks"
+import { useAppDispatch, useAppSelector } from "@ReduxHooks"
 import { useState, SyntheticEvent } from "react"
 import { Input } from "@UI"
+import { getStudents } from "@Features"
 
 type TSelectedOpt = {
   id: number
@@ -44,7 +45,7 @@ function Filters() {
     experienceOpt,
     employmentsOpt,
   } = useAppSelector((state) => state.filters)
-
+  const dispatch = useAppDispatch()
   const [selectedCity, setSelectedCity] = useState<TSelectedOpt | null>(null)
   const [selectedSkills, setSelectedSkills] = useState<TSelectedOpt[]>([])
 
@@ -65,12 +66,21 @@ function Filters() {
   ) => {
     setSelectedSkills([...selectedSkill])
   }
-
   return (
     <form
       noValidate
       onSubmit={handleSubmit((data) => {
-        console.log(data)
+        const transformedData = {
+          ...data,
+          city: selectedCity?.id,
+          skills: selectedSkills.map((skill) => skill.id),
+          employment: Number(data.employment),
+          experience: Number(data.experience),
+          schedule: Number(data.schedule),
+          currency: Number(data.currency),
+          salary_from: Number(data.salary_from),
+        }
+        dispatch(getStudents(transformedData))
       })}
     >
       <Stack spacing={3} maxWidth={"330px"}>
@@ -80,6 +90,7 @@ function Filters() {
             register={register}
             InputProps={{ sx: { height: "53px" } }}
             customLabel="Статус поиска работы"
+            defaultValue={"1"}
             registerName={"currency"}
             fullWidth
             select
@@ -119,6 +130,7 @@ function Filters() {
             register={register}
             InputProps={{ sx: { height: "53px" } }}
             customLabel="Опыт"
+            defaultValue={"1"}
             registerName={"experience"}
             fullWidth
             select
@@ -135,7 +147,8 @@ function Filters() {
             register={register}
             InputProps={{ sx: { height: "53px" } }}
             customLabel="Условия работы"
-            registerName={"employments"}
+            defaultValue={"1"}
+            registerName={"employment"}
             fullWidth
             select
           >
@@ -158,7 +171,6 @@ function Filters() {
               {...params}
               customLabel="Местоположение"
               type={"text"}
-              value={selectedCity}
               register={register}
               registerName={"city"}
               error={!!errors.city}
@@ -204,7 +216,7 @@ function Filters() {
             register={register}
             InputProps={{ sx: { height: "53px" } }}
             customLabel="Занятость"
-            defaultValue={""}
+            defaultValue={"1"}
             registerName={"schedule"}
             fullWidth
             select
@@ -216,12 +228,11 @@ function Filters() {
             ))}
           </Input>
         </FormControl>
-        <Button variant="contained" sx={{ color: "#FFF" }}>
+        <Button variant="contained" sx={{ color: "#FFF" }} type="submit">
           Начать поиск
         </Button>
         <Stack direction={"row"} spacing={2} justifyContent={"space-around"}>
           <Button
-            type="submit"
             variant="text"
             sx={{
               color: "text.primary",
@@ -240,7 +251,7 @@ function Filters() {
               fontWeight: 400,
               textTransform: "none",
             }}
-            onClick={() => reset({})}
+            onClick={() => reset()}
           >
             Сбросить фильтры
           </Button>

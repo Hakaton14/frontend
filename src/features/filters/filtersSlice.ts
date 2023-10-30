@@ -15,6 +15,10 @@ interface IinitialState {
   employmentsOpt: TOpts[]
   currencyOpt: TOpts[]
   schedulesOpt: TOpts[]
+  isLoading: boolean
+  isError: boolean
+  isSuccess: boolean
+  message: string | unknown
 }
 
 const initialState: IinitialState = {
@@ -24,6 +28,10 @@ const initialState: IinitialState = {
   experienceOpt: [],
   currencyOpt: [],
   schedulesOpt: [],
+  isLoading: false,
+  isError: false,
+  isSuccess: false,
+  message: "",
 }
 
 export const getCity = createAsyncThunk("filters/city", async () => {
@@ -59,41 +67,71 @@ const filtersSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getCity.pending, (state) => {})
+      .addCase(getCity.pending, (state) => {
+        state.isLoading = true
+      })
       .addCase(getCity.fulfilled, (state, action) => {
         state.cityOpt = action.payload
+        state.isLoading = false
       })
-      .addCase(getCity.rejected, (state) => {})
+      .addCase(getCity.rejected, (state) => {
+        state.isLoading = false
+      })
 
-      .addCase(getSchedules.pending, (state) => {})
+      .addCase(getSchedules.pending, (state) => {
+        state.isLoading = true
+      })
       .addCase(getSchedules.fulfilled, (state, action) => {
         state.schedulesOpt = action.payload
+        state.isLoading = false
       })
-      .addCase(getSchedules.rejected, (state) => {})
+      .addCase(getSchedules.rejected, (state) => {
+        state.isLoading = false
+      })
 
-      .addCase(getEmployments.pending, (state) => {})
+      .addCase(getEmployments.pending, (state) => {
+        state.isLoading = true
+      })
       .addCase(getEmployments.fulfilled, (state, action) => {
         state.employmentsOpt = action.payload
+        state.isLoading = false
       })
-      .addCase(getEmployments.rejected, (state) => {})
+      .addCase(getEmployments.rejected, (state) => {
+        state.isLoading = false
+      })
 
-      .addCase(getExperiences.pending, (state) => {})
+      .addCase(getExperiences.pending, (state) => {
+        state.isLoading = true
+      })
       .addCase(getExperiences.fulfilled, (state, action) => {
         state.experienceOpt = action.payload
+        state.isLoading = false
       })
-      .addCase(getExperiences.rejected, (state) => {})
+      .addCase(getExperiences.rejected, (state) => {
+        state.isLoading = false
+      })
 
-      .addCase(getSkills.pending, (state) => {})
+      .addCase(getSkills.pending, (state) => {
+        state.isLoading = true
+      })
       .addCase(getSkills.fulfilled, (state, action) => {
         state.skillsOpt = action.payload
+        state.isLoading = false
       })
-      .addCase(getSkills.rejected, (state) => {})
+      .addCase(getSkills.rejected, (state) => {
+        state.isLoading = false
+      })
 
-      .addCase(getCurrency.pending, (state) => {})
+      .addCase(getCurrency.pending, (state) => {
+        state.isLoading = true
+      })
       .addCase(getCurrency.fulfilled, (state, action) => {
         state.currencyOpt = action.payload
+        state.isLoading = false
       })
-      .addCase(getCurrency.rejected, (state) => {})
+      .addCase(getCurrency.rejected, (state) => {
+        state.isLoading = false
+      })
   },
 })
 
