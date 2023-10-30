@@ -1,0 +1,93 @@
+.Container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 60px 0;
+    padding: 40px 140px 40px;
+}
+
+.ToolBar {
+    display: flex;
+    gap: 0 20px;
+    align-items: center;
+    justify-content: left;
+    flex-wrap: nowrap;
+
+    .ToolBarIcon {
+        margin: 0 4px 0 0;
+        width: 24px;
+        height: 24px;
+    }
+}
+
+
+.ContainerTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+
+    .BioShort {
+        margin: 0 45px 0 24px
+    }
+    
+    .ButtonPanel {
+        display: flex;
+        flex-direction: column;
+        gap: 16px 0;
+    }
+    
+    .Contacts {
+    
+        & .ContactLink {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+    
+            & .Link{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 0 8px;
+            }
+        }
+    
+        & .SocialBar {
+            display: flex;
+            gap: 0 16px;
+        }
+    
+        & .iconContact {
+            width: 24px;
+            height: 24px;
+        }
+    }
+}
+
+.ContainerBottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 82px;
+
+    & .ContainerInfo {
+        margin: 0 0 48px 0;
+
+        &:last-child {
+            margin: 0;
+        }
+
+        & .ChipContainer {
+            display: flex;
+            gap: 8px 12px;
+            flex-wrap: wrap;
+        }
+    }
+
+    & .Left {
+        width: 42%;
+    }
+    & .Right {
+        width: 48%;
+    }
+
+}
