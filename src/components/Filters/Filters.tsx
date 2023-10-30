@@ -70,6 +70,7 @@ function Filters() {
     <form
       noValidate
       onSubmit={handleSubmit((data) => {
+        console.log(data)
         const transformedData = {
           ...data,
           city: selectedCity?.id,
@@ -85,7 +86,7 @@ function Filters() {
     >
       <Stack spacing={3} maxWidth={"330px"}>
         <Typography variant="h4">Фильтры</Typography>
-        <FormControl>
+        {/* <FormControl>
           <Input
             register={register}
             InputProps={{ sx: { height: "53px" } }}
@@ -101,7 +102,7 @@ function Filters() {
               </MenuItem>
             ))}
           </Input>
-        </FormControl>
+        </FormControl> */}
 
         <Autocomplete
           multiple
@@ -251,7 +252,18 @@ function Filters() {
               fontWeight: 400,
               textTransform: "none",
             }}
-            onClick={() => reset()}
+            onClick={() => {
+              setSelectedSkills([])
+              reset({
+                schedule: "1",
+                employment: "2",
+                currency: "4",
+                salary_from: "150000",
+                city: "",
+                experience: "1",
+                skills: "",
+              })
+            }}
           >
             Сбросить фильтры
           </Button>
