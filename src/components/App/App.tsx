@@ -14,6 +14,8 @@ import {
   getSkills,
   getVacancies,
 } from "@Features"
+import styles from "./App.module.scss"
+
 function App() {
   const dispatch = useAppDispatch()
   useEffect(() => {
