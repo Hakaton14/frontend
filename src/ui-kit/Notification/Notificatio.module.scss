@@ -1,0 +1,65 @@
+$paddingBotom: 10px;
+$minHeight: 104px;
+
+.MessageContainer {
+    min-width: 350px;
+    min-height: #{$minHeight};
+    padding-bottom:#{$paddingBotom};
+    box-shadow: 0px 4px 6px 0px rgba(176, 190, 197, 0.3);
+    background: rgba(172, 204, 255, 1);
+    box-shadow: 0px 8px 24px 0px rgba(176, 190, 197, 0.3);
+    border-radius: 12px;
+
+    & .MessageContainerError {
+        max-width: 100%;
+        border-radius: 12px 12px 0 0;
+        min-height: calc($minHeight - $paddingBotom);
+        background: rgba(255, 255, 255, 1);
+
+        & .MessageTitle, & .MessageDescription {
+            color: rgba(26, 27, 34, 1);
+        }
+    }
+    
+    & .MessageContainerSucces {
+        max-width: 100%;
+        border-radius: 12px 12px 0 0;
+        min-height: calc($minHeight - $paddingBotom);
+        background: rgba(29, 107, 243, 1);
+
+        & .MessageTitle, & .MessageDescription {
+            color: rgba(255, 255, 255, 1);
+        }
+    }
+}
+
+.MessageContainerError, .MessageContainerSucces {
+    display: flex;
+    align-items: center;
+    gap: 0 8px;
+    padding: 20px 24px 10px 24px;
+}
+
+.MessageTitle{
+    font-family: YS Text;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.MessageDescription {
+    font-family: YS Text;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+.Icon {
+    object-fit: cover;
+    width: 64px;
+    height: 64px;
+}
+
