@@ -22,7 +22,7 @@ const calendarHeaderPropsStyles = {
     ".MuiPickersArrowSwitcher-spacer": {
       width: "220px",
     },
-    ".css-31ca4x-MuiPickersFadeTransitionGroup-root": {
+    ".MuiPickersFadeTransitionGroup-root": {
       display: "flex",
       position: "absolute",
       paddingLeft: "90px",
@@ -30,10 +30,9 @@ const calendarHeaderPropsStyles = {
     "& .MuiPickersCalendarHeader-switchViewButton": {
       display: "none",
     },
-    ".css-1nkg345-MuiButtonBase-root-MuiIconButton-root-MuiPickersArrowSwitcher-button":
-      {
-        marginRight: "20px",
-      },
+    ".MuiIconButton-edgeStart": {
+      marginRight: "20px",
+    },
   },
 }
 
