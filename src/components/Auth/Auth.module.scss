@@ -1,17 +1,26 @@
+// @import 
+
 $paddingWT: 0;
 $paddingWB: 32px;
 $paddingHL: 64px;
 $paddingHR: 64px;
-$bgModule:#1A1B22;
+$bgModule: #F9FAFB;
 
 
 .wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   width:100%;
   height: 100vh;
-  background-color: #{$bgModule};
+  background-image: url('../../ui-kit/icons/authBG.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .container{
@@ -22,8 +31,8 @@ $bgModule:#1A1B22;
   width: calc(448px - #{$paddingWT + $paddingWB});
   min-height: calc(630px - #{$paddingHL + $paddingHR});
   border-radius: 16px;
-  background-color: #F9FAFB;
   padding: #{$paddingWT} #{$paddingHR} #{$paddingWB} #{$paddingHL};
+  background-color: #{$bgModule};
 }
 
 .title {
