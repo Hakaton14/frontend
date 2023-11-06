@@ -11,6 +11,7 @@ import styles from "./Header.module.scss"
 function Header() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
+
   return (
     <Box sx={{ flexGrow: 1, Width: "100%" }}>
       <AppBar position="static" sx={{ backgroundColor: "#1A1B22" }}>
@@ -24,6 +25,7 @@ function Header() {
               margin: "10px 148px 10px 83px",
             }}
           />
+
           {pathname !== "/search" && (
             <Button
               onClick={() => navigate("/search")}
@@ -36,10 +38,12 @@ function Header() {
           )}
 
           <Box sx={{ flexGrow: 1 }} />
+
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton sx={{ padding: "0", marginRight: "52px" }}>
               <img src={UserIcon} alt="Иконка пользователя" />
             </IconButton>
+
             <IconButton
               sx={{
                 padding: "0",
@@ -50,6 +54,7 @@ function Header() {
             >
               <img src={GroupIcon} alt="Иконка писем" />
             </IconButton>
+
             <IconButton sx={{ padding: "0", width: "24px", height: "24px" }}>
               <img src={NotificationIcon} alt="Иконка уведомлений" />
             </IconButton>
