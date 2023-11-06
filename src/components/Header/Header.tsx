@@ -1,14 +1,11 @@
-import AppBar from "@mui/material/AppBar"
-import Box from "@mui/material/Box"
-import Toolbar from "@mui/material/Toolbar"
-import IconButton from "@mui/material/IconButton"
-import SearchIcon from "../../ui-kit/icons/search.svg"
-import NotificationIcon from "../../ui-kit/icons/bell.svg"
-import UserIcon from "../../ui-kit/icons/user.svg"
+import { useLocation, useNavigate } from "react-router-dom"
+import { Button, AppBar, Box, IconButton, Toolbar } from "@mui/material"
 import GroupIcon from "../../ui-kit/icons/letter.svg"
 import Logo from "../../ui-kit/icons/career-logo-1b10b20f 1.svg"
-import { Button } from "@mui/material"
-import { useLocation, useNavigate } from "react-router-dom"
+import NotificationIcon from "../../ui-kit/icons/bell.svg"
+import SearchIcon from "../../ui-kit/icons/search.svg"
+import UserIcon from "../../ui-kit/icons/user.svg"
+
 import styles from "./Header.module.scss"
 
 function Header() {
