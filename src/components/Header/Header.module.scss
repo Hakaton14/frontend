@@ -1,6 +1,8 @@
-.header {
-  background-color: #1a1b22;
-}
-.img:hover{
-cursor: pointer;
+.Logotype {
+  transition: opacity 0.5s;
+
+  &:hover{
+    cursor: pointer;
+    opacity: 0.7;
+  }  
 }

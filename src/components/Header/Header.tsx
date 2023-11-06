@@ -1,36 +1,29 @@
+import { FC } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { Button, AppBar, Box, IconButton, Toolbar } from "@mui/material"
+import { Logotype } from "./Logotype/Logotype"
 import GroupIcon from "../../ui-kit/icons/letter.svg"
-import Logo from "../../ui-kit/icons/career-logo-1b10b20f 1.svg"
 import NotificationIcon from "../../ui-kit/icons/bell.svg"
 import SearchIcon from "../../ui-kit/icons/search.svg"
 import UserIcon from "../../ui-kit/icons/user.svg"
 
-import styles from "./Header.module.scss"
-
 const styleSx = {
   appBar: {
     backgroundColor: "#1A1B22",
-    Width: "100%",
+    width: "100%",
+    minHeight: "60px",
+    padding: "0 62px 0 82px",
   },
 }
 
-function Header() {
+const Header: FC = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
   return (
     <AppBar position="fixed" sx={styleSx.appBar}>
       <Toolbar>
-        <img
-          onClick={() => navigate("/")}
-          src={Logo}
-          alt="Логотип"
-          className={styles.img}
-          style={{
-            margin: "10px 148px 10px 83px",
-          }}
-        />
+        <Logotype onClick={() => navigate("/")} />
 
         {pathname !== "/search" && (
           <Button
