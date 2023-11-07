@@ -1,18 +1,19 @@
 import { FC } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import { Button, AppBar, Box, IconButton, Toolbar } from "@mui/material"
+import { Button, AppBar, Box, Toolbar } from "@mui/material"
 import { Logotype } from "./Logotype/Logotype"
-import GroupIcon from "../../ui-kit/icons/letter.svg"
-import NotificationIcon from "../../ui-kit/icons/bell.svg"
+import { ToolPanel } from "./ToolPanel/ToolPanel"
 import SearchIcon from "../../ui-kit/icons/search.svg"
-import UserIcon from "../../ui-kit/icons/user.svg"
 
 const styleSx = {
   appBar: {
     backgroundColor: "#1A1B22",
     width: "100%",
     minHeight: "60px",
-    padding: "0 62px 0 82px",
+    padding: "0px 68px 0 48px",
+  },
+  ToolBar: {
+    "& .MuiToolbar-root": { padding: 0 },
   },
 }
 
@@ -22,7 +23,7 @@ const Header: FC = () => {
 
   return (
     <AppBar position="fixed" sx={styleSx.appBar}>
-      <Toolbar>
+      <Toolbar sx={styleSx.ToolBar}>
         <Logotype onClick={() => navigate("/")} />
 
         {pathname !== "/search" && (
@@ -38,26 +39,7 @@ const Header: FC = () => {
 
         <Box sx={{ flexGrow: 1 }} />
 
-        <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          <IconButton sx={{ padding: "0", marginRight: "52px" }}>
-            <img src={UserIcon} alt="Иконка пользователя" />
-          </IconButton>
-
-          <IconButton
-            sx={{
-              padding: "0",
-              marginRight: "52px",
-              width: "24px",
-              height: "24px",
-            }}
-          >
-            <img src={GroupIcon} alt="Иконка писем" />
-          </IconButton>
-
-          <IconButton sx={{ padding: "0", width: "24px", height: "24px" }}>
-            <img src={NotificationIcon} alt="Иконка уведомлений" />
-          </IconButton>
-        </Box>
+        <ToolPanel />
       </Toolbar>
     </AppBar>
   )
