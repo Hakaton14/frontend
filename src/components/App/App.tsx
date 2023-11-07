@@ -29,12 +29,6 @@ function App() {
     dispatch(getVacancies())
   }, [])
 
-  useEffect(() => {
-    if (!user) {
-      navigate("/sign-in")
-    }
-  }, [user, navigate])
-
   return (
     <div className="App">
       <Routes>
