@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /home/hr_prakticum
+            cd /home/hr_praktikum
             sudo docker compose down
             sudo docker image rm thesuncatcher222/hr_praktikum_frontend
             sudo docker image rm thesuncatcher222/hr_praktikum_gateway
