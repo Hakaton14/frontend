@@ -41,13 +41,12 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd hakaton
-            sudo docker compose -f docker-compose.production.yml down
+            cd /home/hr_prakticum
+            sudo docker compose docker-compose.yml down
             sudo docker image rm thesuncatcher222/hakaton_14_frontend
             sudo docker image rm thesuncatcher222/hakaton_14_gateway
             sudo docker volume rm hakaton_static_volume
-            sudo docker volume prune --force
-            sudo docker compose -f docker-compose.production.yml up -d --build
+            sudo docker compose up -d --build
             sudo service nginx restart
   
   send_message_telegram:
