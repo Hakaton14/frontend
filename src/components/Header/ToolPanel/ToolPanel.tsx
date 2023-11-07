@@ -8,14 +8,12 @@ import ExitIcon from "../../../ui-kit/icons/exit.svg"
 import UserIcon from "../../../ui-kit/icons/user.svg"
 
 import styles from "../Header.module.scss"
-import { reset } from "features/auth/authSlice"
 
 export const ToolPanel: FC = () => {
   const dispatch = useAppDispatch()
 
   const handlerLogout = () => {
     dispatch(logout())
-    dispatch(reset())
     console.log("logout")
   }
 
