@@ -1,6 +1,26 @@
-.header {
-  background-color: #1a1b22;
+.Logotype {
+  transition: opacity 0.5s;
+
+  &:hover{
+    cursor: pointer;
+    opacity: 0.7;
+  }  
 }
-.img:hover{
-cursor: pointer;
+
+.ToolPanel {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0 32px;
+
+  & .IconBtn {
+    width: 24px;
+    height: 24px;
+    transition: opacity 0.5s;
+
+    &:hover{
+      cursor: pointer;
+      opacity: 0.7;
+    }
+  }
 }
