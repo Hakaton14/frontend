@@ -25,7 +25,7 @@ jobs:
         with:
           context: .
           push: True
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/hakaton_14_frontend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/hr_praktikum_frontend:latest
 
   deploy_on_server:
     name: Deploy project on server
@@ -42,10 +42,10 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /home/hr_prakticum
-            sudo docker compose docker-compose.yml down
-            sudo docker image rm thesuncatcher222/hakaton_14_frontend
-            sudo docker image rm thesuncatcher222/hakaton_14_gateway
-            sudo docker volume rm hakaton_static_volume
+            sudo docker compose down
+            sudo docker image rm thesuncatcher222/hr_praktikum_frontend
+            sudo docker image rm thesuncatcher222/hr_praktikum_gateway
+            sudo docker volume rm hr_praktikum_hr_praktikum_static_volume
             sudo docker compose up -d --build
             sudo service nginx restart
   
