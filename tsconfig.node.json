@@ -1,5 +1,4 @@
 {
-  "files": ["config/envConfig.ts"],
   "compilerOptions": {
     "composite": true,
     "module": "ESNext",
