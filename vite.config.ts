@@ -1,9 +1,15 @@
 import { defineConfig } from "vitest/config"
 import react from "@vitejs/plugin-react"
+import { loadEnv } from "./config/envConfig"
+
+const env = loadEnv()
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  define: {
+    "process.env": env,
+  },
   resolve: {
     alias: {
       "@Components": "./src/components/index.ts",
