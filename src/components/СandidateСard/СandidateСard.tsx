@@ -1,12 +1,13 @@
-import styles from "./СandidateСard.module.scss"
-import FotoIcon from "../../ui-kit/icons/foto_icon.png"
-import LikeIcon from "../../ui-kit/icons/like_icon.svg"
-import HideIcon from "../../ui-kit/icons/hide_icon.svg"
+import { FC } from "react"
 import { Chip } from "@mui/material"
+import FotoIcon from "../../ui-kit/icons/foto_icon.png"
+
+import styles from "./СandidateСard.module.scss"
 
 interface СandidateСardProps {
   student: IStudent
 }
+
 interface IStudent {
   id: number
   first_name: string
@@ -21,18 +22,21 @@ interface ISkill {
   category: string
 }
 
-function СandidateСard({ student }: СandidateСardProps) {
+const СandidateСard: FC<СandidateСardProps> = ({ student }) => {
   return (
     <div className={styles.mainContainer}>
-      {/* <div className={styles.innerContainer}> */}
       <img className={styles.fotoIcon} src={FotoIcon} alt="Иконка фотографии" />
+
       <div className={styles.infoWrapper}>
         <h2
           className={styles.candidateName}
         >{`${student.last_name} ${student.first_name}`}</h2>
+
         <h3 className={styles.candidateJob}>UX/UI дизайнер</h3>
+
         <h3 className={styles.candidateInfo}>{student.city.name}</h3>
       </div>
+
       <div className={styles.skillsWrapper}>
         <div className={styles.skillsSecondWrapper}>
           {student.skills.map((skill) => (
@@ -52,15 +56,6 @@ function СandidateСard({ student }: СandidateСardProps) {
           ))}
         </div>
       </div>
-      {/* <div className={styles.iconsWrapper}>
-        <img
-          className={styles.likeIcon}
-          src={LikeIcon}
-          alt="Иконка добавить в избранное"
-        />
-        <img src={HideIcon} alt="Иконка скрыть" />
-      </div>
-      </div> */}
     </div>
   )
 }
