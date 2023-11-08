@@ -1,10 +1,10 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useNavigate } from "react-router-dom"
 import { Auth } from "@Components"
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"
 import MainScreen from "../MainScreen/MainScreen"
 import Search from "../Search/Search"
 import { useEffect } from "react"
-import { useAppDispatch } from "@ReduxHooks"
+import { useAppDispatch, useAppSelector } from "@ReduxHooks"
 import {
   getCity,
   getCurrency,
@@ -14,8 +14,11 @@ import {
   getSkills,
   getVacancies,
 } from "@Features"
+
 function App() {
   const dispatch = useAppDispatch()
+  const { user } = useAppSelector((state) => state.auth)
+  const navigate = useNavigate()
   useEffect(() => {
     dispatch(getCurrency())
     dispatch(getCity())

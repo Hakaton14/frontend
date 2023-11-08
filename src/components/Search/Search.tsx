@@ -46,14 +46,20 @@ function Search() {
                 fontWeight={500}
                 color="text.primary"
               >
-                {results?.length}
+                {results?.length || "0"}
               </Typography>
             </h2>
           </div>
           <Stack spacing={1}>
-            {results?.map((student) => (
-              <СandidateСard student={student} key={student.id} />
-            ))}
+            {results ? (
+              results?.map((student) => (
+                <СandidateСard student={student} key={student.id} />
+              ))
+            ) : (
+              <Typography variant="h5" component={"p"}>
+                Попробуйте изменить параметры поиска
+              </Typography>
+            )}
           </Stack>
         </Grid>
         <Grid item xs={3}>

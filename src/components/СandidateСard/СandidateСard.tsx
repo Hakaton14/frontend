@@ -12,7 +12,7 @@ interface IStudent {
   first_name: string
   last_name: string
   skills: ISkill[]
-  city: number
+  city: { id: number; name: string }
 }
 
 interface ISkill {
@@ -31,7 +31,7 @@ function СandidateСard({ student }: СandidateСardProps) {
           className={styles.candidateName}
         >{`${student.last_name} ${student.first_name}`}</h2>
         <h3 className={styles.candidateJob}>UX/UI дизайнер</h3>
-        <h3 className={styles.candidateInfo}>28 лет, г. Москва</h3>
+        <h3 className={styles.candidateInfo}>{student.city.name}</h3>
       </div>
       <div className={styles.skillsWrapper}>
         <div className={styles.skillsSecondWrapper}>
@@ -52,7 +52,7 @@ function СandidateСard({ student }: СandidateСardProps) {
           ))}
         </div>
       </div>
-      <div className={styles.iconsWrapper}>
+      {/* <div className={styles.iconsWrapper}>
         <img
           className={styles.likeIcon}
           src={LikeIcon}
@@ -60,7 +60,7 @@ function СandidateСard({ student }: СandidateСardProps) {
         />
         <img src={HideIcon} alt="Иконка скрыть" />
       </div>
-      {/* </div> */}
+      </div> */}
     </div>
   )
 }

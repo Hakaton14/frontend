@@ -1,7 +1,8 @@
 FROM node:16-slim
-LABEL description="Cleanpro: Frontend" \
+LABEL description="Hakaton Team 14 Nginx gateway" \
       version="1.0" \
-      maintainer="Cleanpro team"
+      maintainer="TheSuncatcher222" \
+      deployer="https://github.com/TheSuncatcher222"
 WORKDIR /app
 COPY . ./
 RUN npm i

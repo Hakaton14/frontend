@@ -6,7 +6,7 @@ interface IResult {
   first_name: string
   last_name: string
   skills: ISkill[]
-  city: number
+  city: { id: number; name: string }
 }
 
 interface ISkill {
