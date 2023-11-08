@@ -23,8 +23,11 @@ interface ISkill {
 }
 
 const СandidateСard: FC<СandidateСardProps> = ({ student }) => {
+  const handelOnClickCard = () => {
+    console.log("Card student-id")
+  }
   return (
-    <div className={styles.mainContainer}>
+    <div className={styles.mainContainer} onClick={handelOnClickCard}>
       <img className={styles.fotoIcon} src={FotoIcon} alt="Иконка фотографии" />
 
       <div className={styles.infoWrapper}>
