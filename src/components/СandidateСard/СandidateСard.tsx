@@ -1,8 +1,9 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { Chip } from "@mui/material"
 import FotoIcon from "../../ui-kit/icons/foto_icon.png"
 
 import styles from "./СandidateСard.module.scss"
+import PopupResume from "./PopupResume/PopupResume"
 
 interface СandidateСardProps {
   student: IStudent
@@ -23,11 +24,16 @@ interface ISkill {
 }
 
 const СandidateСard: FC<СandidateСardProps> = ({ student }) => {
-  const handelOnClickCard = () => {
+  const [open, setOpen] = useState<boolean>(false)
+
+  const handelOpenPopup = () => {
+    setOpen(!open)
     console.log("Card student-id")
   }
+
   return (
-    <div className={styles.mainContainer} onClick={handelOnClickCard}>
+    <div className={styles.mainContainer} onClick={handelOpenPopup}>
+      <PopupResume isOpen={open} onCloused={handelOpenPopup} />
       <img className={styles.fotoIcon} src={FotoIcon} alt="Иконка фотографии" />
 
       <div className={styles.infoWrapper}>
