@@ -1,5 +1,6 @@
-import axios from "axios"
 import { API_URL } from "@Utils"
+import axios from "axios"
+
 const json = localStorage.getItem("user")
 const user = json && JSON.parse(json)
 
