@@ -1,7 +1,11 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit"
-import { authReducer, vacancyReducer } from "@Features"
-import { filtersReducer } from "@Features"
-import { searchReducer } from "@Features"
+import {
+  authReducer,
+  vacancyReducer,
+  filtersReducer,
+  searchReducer,
+  studentReducer,
+} from "@Features"
 
 export const store = configureStore({
   reducer: {
@@ -9,6 +13,7 @@ export const store = configureStore({
     filters: filtersReducer,
     vacancies: vacancyReducer,
     search: searchReducer,
+    student: studentReducer,
   },
 })
 

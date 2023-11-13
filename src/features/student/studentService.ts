@@ -4,12 +4,8 @@ import axios from "axios"
 const json = localStorage.getItem("user")
 const user = json && JSON.parse(json)
 
-const getStudents = async (query: any) => {
-  const response = await axios.get(`${API_URL}/students/`, {
-    params: query,
-    paramsSerializer: {
-      indexes: null,
-    },
+const getCandidateResume = async (studentID: number | string) => {
+  const response = await axios.get(`${API_URL}/students/${studentID}`, {
     headers: {
       Authorization: `Bearer ${user.access}`,
     },
@@ -18,8 +14,8 @@ const getStudents = async (query: any) => {
   return response.data
 }
 
-const searchService = {
-  getStudents,
+const studentService = {
+  getCandidateResume,
 }
 
-export default searchService
+export default studentService

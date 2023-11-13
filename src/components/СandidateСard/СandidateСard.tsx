@@ -1,12 +1,16 @@
-import styles from "./СandidateСard.module.scss"
-import FotoIcon from "../../ui-kit/icons/foto_icon.png"
-import LikeIcon from "../../ui-kit/icons/like_icon.svg"
-import HideIcon from "../../ui-kit/icons/hide_icon.svg"
+import { FC, useState } from "react"
 import { Chip } from "@mui/material"
+import { useAppDispatch } from "@ReduxHooks"
+import { closeStudent, getStudentProfile } from "@Features"
+import PopupResume from "./PopupResume/PopupResume"
+import FotoIcon from "../../ui-kit/icons/foto_icon.png"
+
+import styles from "./СandidateСard.module.scss"
 
 interface СandidateСardProps {
   student: IStudent
 }
+
 interface IStudent {
   id: number
   first_name: string
@@ -21,18 +25,39 @@ interface ISkill {
   category: string
 }
 
-function СandidateСard({ student }: СandidateСardProps) {
+const СandidateСard: FC<СandidateСardProps> = ({ student }) => {
+  const [open, setOpen] = useState<boolean>(false)
+  const dispatch = useAppDispatch()
+
+  const handelOpenPopup = () => {
+    if (open === true) {
+      setOpen(false)
+      dispatch(closeStudent())
+    } else {
+      setOpen(true)
+    }
+  }
+
+  const onCliickCard = () => {
+    handelOpenPopup()
+    dispatch(getStudentProfile(student.id))
+  }
+
   return (
-    <div className={styles.mainContainer}>
-      {/* <div className={styles.innerContainer}> */}
+    <div className={styles.mainContainer} onClick={onCliickCard}>
+      <PopupResume isOpen={open} onCloused={handelOpenPopup} />
       <img className={styles.fotoIcon} src={FotoIcon} alt="Иконка фотографии" />
+
       <div className={styles.infoWrapper}>
         <h2
           className={styles.candidateName}
         >{`${student.last_name} ${student.first_name}`}</h2>
+
         <h3 className={styles.candidateJob}>UX/UI дизайнер</h3>
+
         <h3 className={styles.candidateInfo}>{student.city.name}</h3>
       </div>
+
       <div className={styles.skillsWrapper}>
         <div className={styles.skillsSecondWrapper}>
           {student.skills.map((skill) => (
@@ -52,15 +77,6 @@ function СandidateСard({ student }: СandidateСardProps) {
           ))}
         </div>
       </div>
-      {/* <div className={styles.iconsWrapper}>
-        <img
-          className={styles.likeIcon}
-          src={LikeIcon}
-          alt="Иконка добавить в избранное"
-        />
-        <img src={HideIcon} alt="Иконка скрыть" />
-      </div>
-      </div> */}
     </div>
   )
 }
