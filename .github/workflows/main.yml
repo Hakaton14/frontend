@@ -25,7 +25,7 @@ jobs:
         with:
           context: .
           push: True
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/hr_praktikum_frontend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/hr_practicum_frontend:latest
 
   deploy_on_server:
     name: Deploy project on server
@@ -41,11 +41,11 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /home/hr_praktikum
+            cd /home/hr_practicum
             sudo docker compose down
-            sudo docker image rm ${{ secrets.DOCKERHUB_USERNAME }}/hr_praktikum_frontend
-            sudo docker image rm ${{ secrets.DOCKERHUB_USERNAME }}/hr_praktikum_gateway
-            sudo docker volume rm hr_praktikum_hr_praktikum_static_volume
+            sudo docker image rm ${{ secrets.DOCKERHUB_USERNAME }}/hr_practicum_frontend
+            sudo docker image rm ${{ secrets.DOCKERHUB_USERNAME }}/hr_practicum_gateway
+            sudo docker volume rm hr_practicum_hr_practicum_static_volume
             sudo docker compose up -d --build
             sudo service nginx restart
 
@@ -59,4 +59,4 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_ME_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          message: Деплой "Hr-Praktikum frontend" выполнен успешно!
+          message: Деплой "Hr-practicum frontend" выполнен успешно!
