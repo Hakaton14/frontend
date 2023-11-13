@@ -1,7 +1,9 @@
 import { Typography, List, ListItem } from "@mui/material"
 import { Resume } from "../MokeData"
-import styles from "../CandidateResume.module.scss"
 import { Contacts } from "./Contacts/Contacts"
+import { useAppSelector } from "@ReduxHooks"
+
+import styles from "../CandidateResume.module.scss"
 
 const styleSx = {
   fullName: {
@@ -46,48 +48,42 @@ const styleSx = {
 }
 
 export const Bio = () => {
+  const { studentProfile } = useAppSelector((state) => state.student)
+
   return (
     <div className={styles.BioShort}>
       <Typography variant="h2" sx={styleSx.fullName}>
-        {Resume.fullName}
+        {`${studentProfile?.first_name} ${studentProfile?.last_name}`}
       </Typography>
+
       <Typography variant="h3" sx={styleSx.info}>
-        {`${Resume.occupation}, ${Resume.age}, ${Resume.location}`}
+        {`${studentProfile?.specialization}, г.${studentProfile?.city.name}`}
       </Typography>
+
       <List sx={styleSx.list}>
-        <ListItem sx={styleSx.lisItem} alignItems="flex-start">
-          <Typography variant="body1" sx={styleSx.body1}>
-            Стаж работы:
-          </Typography>
-          <Typography variant="body2" sx={styleSx.body2}>
-            {Resume.experience}
-          </Typography>
-        </ListItem>
-        <ListItem sx={styleSx.lisItem} alignItems="flex-start">
-          <Typography variant="body1" sx={styleSx.body1}>
-            Желаемый график работы:
-          </Typography>
-          <Typography variant="body2" sx={styleSx.body2}>
-            {Resume.desiredSchedule}
-          </Typography>
-        </ListItem>
         <ListItem sx={styleSx.lisItem} alignItems="flex-start">
           <Typography variant="body1" sx={styleSx.body1}>
             Желаемый тип занятости:
           </Typography>
+
           <Typography variant="body2" sx={styleSx.body2}>
-            {Resume.desiredEmploymentType}
+            {studentProfile?.employment.map((el) => {
+              return el.name
+            })}
           </Typography>
         </ListItem>
+
         <ListItem sx={styleSx.lisItem} alignItems="flex-start">
           <Typography variant="body1" sx={styleSx.body1}>
             Готовность к переезду:
           </Typography>
+
           <Typography variant="body2" sx={styleSx.body2}>
-            {Resume.willingnessToRelocate}
+            {studentProfile ? `Да` : `Нет`}
           </Typography>
         </ListItem>
       </List>
+
       <Contacts />
     </div>
   )

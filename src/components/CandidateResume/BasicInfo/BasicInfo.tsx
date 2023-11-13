@@ -24,31 +24,41 @@ const styleSx = {
   },
 }
 
+type TSkills = {
+  id: number
+  skill: string
+  category: string
+}
+
 interface BasicInfoProps {
   title: string
-  paragraph?: string | string[]
+  paragraph?: string
+  chips?: TSkills[]
 }
-export const BasicInfo: FC<BasicInfoProps> = ({ title, paragraph }) => {
+
+export const BasicInfo: FC<BasicInfoProps> = ({ title, paragraph, chips }) => {
   return (
     <div className={styles.ContainerInfo}>
       <Typography variant="h3" sx={styleSx.header}>
         {title}
       </Typography>
 
-      {Array.isArray(paragraph) ? (
+      {
         <div className={styles.ChipContainer}>
-          {paragraph.map((chip, index) => {
+          {chips?.map((chip) => {
             return (
               <Chip
                 size="medium"
                 sx={styleSx.chip}
-                label={chip}
-                key={index + 1}
+                label={chip.skill}
+                key={chip.id}
               />
             )
           })}
         </div>
-      ) : (
+      }
+
+      {paragraph && (
         <Typography variant="body1" sx={styleSx.paragraph}>
           {paragraph}
         </Typography>

@@ -10,6 +10,7 @@ import {
 } from "@IconResume"
 import { Resume } from "../../MokeData"
 import styles from ".././../CandidateResume.module.scss"
+import { useAppSelector } from "@ReduxHooks"
 
 const styleSx = {
   contacts: {
@@ -32,39 +33,41 @@ const styleSx = {
 }
 
 export const Contacts = () => {
+  const { studentProfile } = useAppSelector((state) => state.student)
+
   return (
     <div className={styles.Contacts}>
       <Typography variant="h2" sx={styleSx.contacts}>
         Контакты:
       </Typography>
       <div className={styles.ContactLink}>
-        <a className={styles.Link} href={`tel:${Resume.contacts.phone}`}>
+        <a className={styles.Link} href={`tel:${studentProfile?.phone}`}>
           <img
             src={Phone}
             alt="Иконка мобильного телефона"
             className={styles.iconContact}
           />
           <Typography variant="body2" sx={styleSx.contactsValue}>
-            {Resume.contacts.phone}
+            {studentProfile?.phone}
           </Typography>
         </a>
 
-        <a className={styles.Link} href={`mailto:${Resume.contacts.mail}`}>
+        <a className={styles.Link} href={`mailto:${studentProfile?.email}`}>
           <img
             src={Email}
             alt="Иконка электонной почты"
             className={styles.iconContact}
           />
           <Typography variant="body2" sx={styleSx.contactsValue}>
-            {Resume.contacts.mail}
+            {studentProfile?.email}
           </Typography>
         </a>
 
         <div className={styles.SocialBar}>
-          {Resume.contacts.vk && (
+          {studentProfile?.link_vk && (
             <a
               className={styles.Link}
-              href={Resume.contacts.vk}
+              href={studentProfile?.link_vk}
               target="_blank"
             >
               <img
@@ -75,10 +78,10 @@ export const Contacts = () => {
             </a>
           )}
 
-          {Resume.contacts.telegram && (
+          {studentProfile?.link_tg && (
             <a
               className={styles.Link}
-              href={Resume.contacts.telegram}
+              href={studentProfile?.link_tg}
               target="_blank"
             >
               <img
@@ -89,10 +92,10 @@ export const Contacts = () => {
             </a>
           )}
 
-          {Resume.contacts.facebook && (
+          {studentProfile?.link_fb && (
             <a
               className={styles.Link}
-              href={Resume.contacts.facebook}
+              href={studentProfile?.link_fb}
               target="_blank"
             >
               <img
@@ -103,10 +106,10 @@ export const Contacts = () => {
             </a>
           )}
 
-          {Resume.contacts.behance && (
+          {studentProfile?.link_be && (
             <a
               className={styles.Link}
-              href={Resume.contacts.behance}
+              href={studentProfile?.link_be}
               target="_blank"
             >
               <img
@@ -117,10 +120,10 @@ export const Contacts = () => {
             </a>
           )}
 
-          {Resume.contacts.linkedin && (
+          {studentProfile?.link_in && (
             <a
               className={styles.Link}
-              href={Resume.contacts.linkedin}
+              href={studentProfile?.link_in}
               target="_blank"
             >
               <img

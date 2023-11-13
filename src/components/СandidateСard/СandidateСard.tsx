@@ -1,9 +1,11 @@
 import { FC, useState } from "react"
 import { Chip } from "@mui/material"
+import { useAppDispatch } from "@ReduxHooks"
+import { closeStudent, getStudentProfile } from "@Features"
+import PopupResume from "./PopupResume/PopupResume"
 import FotoIcon from "../../ui-kit/icons/foto_icon.png"
 
 import styles from "./СandidateСard.module.scss"
-import PopupResume from "./PopupResume/PopupResume"
 
 interface СandidateСardProps {
   student: IStudent
@@ -25,14 +27,24 @@ interface ISkill {
 
 const СandidateСard: FC<СandidateСardProps> = ({ student }) => {
   const [open, setOpen] = useState<boolean>(false)
+  const dispatch = useAppDispatch()
 
   const handelOpenPopup = () => {
-    setOpen(!open)
-    console.log("Card student-id")
+    if (open === true) {
+      setOpen(false)
+      dispatch(closeStudent())
+    } else {
+      setOpen(true)
+    }
+  }
+
+  const onCliickCard = () => {
+    handelOpenPopup()
+    dispatch(getStudentProfile(student.id))
   }
 
   return (
-    <div className={styles.mainContainer} onClick={handelOpenPopup}>
+    <div className={styles.mainContainer} onClick={onCliickCard}>
       <PopupResume isOpen={open} onCloused={handelOpenPopup} />
       <img className={styles.fotoIcon} src={FotoIcon} alt="Иконка фотографии" />
 
