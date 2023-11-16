@@ -1,21 +1,23 @@
-import styles from "./CandidateTable.module.scss"
-import Accordion from "@mui/material/Accordion"
-import AccordionSummary from "@mui/material/AccordionSummary"
-import AccordionDetails from "@mui/material/AccordionDetails"
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
-import LinearProgress from "@mui/material/LinearProgress"
-import { Button, Stack } from "@mui/material"
-
-import CandidatInfoTable from "../CandidatInfoTable/CandidatInfoTable"
-
+import { FC } from "react"
+import { CandidatInfoTable } from "@Components"
+import { useAppSelector } from "@ReduxHooks"
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  LinearProgress,
+  Button,
+  Stack,
+} from "@mui/material"
+import { ExpandMore } from "@mui/icons-material"
 import PencilIcon from "../../ui-kit/icons/pencil-1.svg"
 import FolderIcon from "../../ui-kit/icons/folder.svg"
 import EyeIcon from "../../ui-kit/icons/eye.svg"
-import { useAppSelector } from "@ReduxHooks"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import "dayjs/locale/ru"
-import { FC } from "react"
+
+import styles from "./CandidateTable.module.scss"
 
 const CandidateTable: FC = () => {
   dayjs.extend(relativeTime)
@@ -34,12 +36,8 @@ const CandidateTable: FC = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              // alignContent: "flex-end",
             }}
-            expandIcon={
-              <ExpandMoreIcon sx={{ width: "24px", height: "24px" }} />
-            }
-            // aria-controls="panel1a-content"
+            expandIcon={<ExpandMore sx={{ width: "24px", height: "24px" }} />}
             id="panel1a-header"
           >
             <div className={styles.tableWrapper}>
