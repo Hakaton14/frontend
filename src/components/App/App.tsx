@@ -1,7 +1,6 @@
-import { Routes, Route, useNavigate } from "react-router-dom"
-import { Auth } from "@Components"
+import { Routes, Route } from "react-router-dom"
+import { Auth, Vacancy } from "@Components"
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"
-import MainScreen from "../MainScreen/MainScreen"
 import Search from "../Search/Search"
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "@ReduxHooks"
@@ -14,11 +13,11 @@ import {
   getSkills,
   getVacancies,
 } from "@Features"
+import { MainLayout } from "@Layout"
 
 function App() {
   const dispatch = useAppDispatch()
-  const { user } = useAppSelector((state) => state.auth)
-  const navigate = useNavigate()
+  useAppSelector((state) => state.auth)
   useEffect(() => {
     dispatch(getCurrency())
     dispatch(getCity())
@@ -27,24 +26,20 @@ function App() {
     dispatch(getEmployments())
     dispatch(getExperiences())
     dispatch(getVacancies())
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="App">
       <Routes>
-        <Route
-          path="/"
-          element={<ProtectedRoute element={MainScreen} />}
-        ></Route>
-        <Route
-          path="/search"
-          element={<ProtectedRoute element={Search} />}
-        ></Route>
-        <Route path="sign-in" element={<Auth podComponent="login" />}></Route>
-        <Route
-          path="sign-up"
-          element={<Auth podComponent="registration" />}
-        ></Route>
+        <Route path="/" element={<ProtectedRoute element={Vacancy} />} />
+
+        <Route path="/search" element={<ProtectedRoute element={Search} />} />
+
+        <Route path="sign-in" element={<Auth podComponent="login" />} />
+
+        <Route path="sign-up" element={<Auth podComponent="registration" />} />
+
+        <Route path="/test" element={<MainLayout />} />
       </Routes>
     </div>
   )
