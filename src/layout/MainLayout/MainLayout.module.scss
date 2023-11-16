@@ -1,0 +1,28 @@
+.MainLayout {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    padding: 60px 82px 102px 82px;
+
+   
+}
+
+.Main {
+    padding: 60px 0 0 0;
+    height: 400px;
+    display: flex;
+    gap: 0 58px;
+
+    & .LeftBox {
+        width: 78%;
+        height: 1000px;
+        background-color: aqua;
+        overflow-y: auto
+    }
+
+    & .RightBox {
+        width: 22%;
+        height: 100%;
+        background-color: blueviolet;
+    }
+}
