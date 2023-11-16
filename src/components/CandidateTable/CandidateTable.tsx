@@ -72,7 +72,7 @@ function CandidateTable() {
                     className={styles.icon}
                     src={PencilIcon}
                     alt="Иконка карандаша"
-                  ></img>
+                  />
                   Изменить
                 </Button>
                 <Button
@@ -90,7 +90,7 @@ function CandidateTable() {
                     className={styles.icon}
                     src={FolderIcon}
                     alt="Иконка папки"
-                  ></img>
+                  />
                   В архив
                 </Button>
                 <Button
@@ -107,7 +107,7 @@ function CandidateTable() {
                     className={styles.icon}
                     src={EyeIcon}
                     alt="Иконка глаза"
-                  ></img>
+                  />
                   Скрыть
                 </Button>
               </div>
