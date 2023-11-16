@@ -21,6 +21,7 @@ const CandidateTable: FC = () => {
   dayjs.extend(relativeTime)
 
   const vacancies = useAppSelector((state) => state.vacancies.vacancyList)
+
   return (
     <Stack spacing={1}>
       {vacancies.map((vacancy) => (
@@ -44,6 +45,7 @@ const CandidateTable: FC = () => {
             <div className={styles.tableWrapper}>
               <div className={styles.professionWrapper}>
                 <h2 className={styles.vacantionTitle}>{vacancy.name}</h2>
+
                 <h3 className={styles.progressTitle}>
                   {dayjs(vacancy.pub_datetime).locale("ru").fromNow()}
                 </h3>
@@ -51,6 +53,7 @@ const CandidateTable: FC = () => {
 
               <div className={styles.progressWrapper}>
                 <h3 className={styles.progress}>Статус: 75%</h3>
+
                 <LinearProgress
                   sx={{ width: "132px", height: "8px", borderRadius: "64px" }}
                   variant="determinate"
@@ -58,6 +61,7 @@ const CandidateTable: FC = () => {
                 />
               </div>
 
+              {/* TODO: Вынести в подкомпонент  */}
               <div className={styles.buttonWrapper}>
                 <Button
                   sx={{
@@ -77,6 +81,7 @@ const CandidateTable: FC = () => {
                   />
                   Изменить
                 </Button>
+
                 <Button
                   sx={{
                     padding: "0",
@@ -95,6 +100,7 @@ const CandidateTable: FC = () => {
                   />
                   В архив
                 </Button>
+
                 <Button
                   sx={{
                     padding: "0",
