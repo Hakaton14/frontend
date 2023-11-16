@@ -1,0 +1,30 @@
+.mainContainer {
+  max-width: max-content;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+}
+
+.title {
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 40px;
+  margin-bottom: 56px;
+}
+
+.buttonWrapper {
+  margin-bottom: 24px;
+}
+
+.tableButtonWrapper {
+  margin-bottom: 28px;
+}
+
+.addIcon {
+  padding-right: 4px;
+}
