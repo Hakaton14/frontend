@@ -14,6 +14,7 @@ export default defineConfig({
       "@Utils": "./src/utils/index.ts",
       "@Features": "./src/features/index.ts",
       "@IconResume": "./src/ui-kit/icons/resume/index.ts",
+      "@Layout": "./src/layout/index.ts",
     },
   },
   server: {

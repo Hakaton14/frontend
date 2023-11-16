@@ -24,6 +24,7 @@
       "@Features": ["features"],
       "@ReduxHooks": ["app"],
       "@IconResume": ["ui-kit/icons/resume"],
+      "@Layout": ["layout/index.ts"],
 
     },
   },
