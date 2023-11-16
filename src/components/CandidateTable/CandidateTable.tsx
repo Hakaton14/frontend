@@ -15,7 +15,9 @@ import { useAppSelector } from "@ReduxHooks"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import "dayjs/locale/ru"
-function CandidateTable() {
+import { FC } from "react"
+
+const CandidateTable: FC = () => {
   dayjs.extend(relativeTime)
 
   const vacancies = useAppSelector((state) => state.vacancies.vacancyList)
